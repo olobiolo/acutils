@@ -30,7 +30,17 @@
 
 insert_zeros <- function(X, zeros = 'auto', after = 1) {
   # check arguments
-  if (!is.character(X)) stop('"X" is not a character vector')
+  if (!is.character(X)) {
+    if (is.factor(X)) {
+      X <- as.character(X)
+      warning('X is a factor, coercing to character')
+    } else {
+      stop('don\'t know how to deal with type ', typeof(X))
+    }
+  }
+  if (anyNA(X)) stop('X contains NAs')
+  force(zeros)
+  force(after)
   if (zeros < 1) {
     print('waste of time...')
     return(X)
