@@ -1,40 +1,67 @@
-#' interleave two vectors
+#' interleave vectors
 #'
-#' Given two vectors, x and y, outputs a vector x1, y1, x2, y2, etc.
-#' Currently only supports two vectors.
+#' Given a number vectors, e.g. x, y and z, outputs a vector x1, y1, z1, x2, y2, z2, etc.
+#' If the vectors are of different types, they are coerced as usual.
 #'
-#' @param x,y vectors
+#' @param ... any number vectors
+#' @param useNAs logical flag whether preexisting NAs should be preserved
+#'
+#' @return a single interleaved vector
+#'
+#' @examples
+#' x1 <- rep('a', 3)
+#' x2 <- rep('b', 3)
+#' x3 <- rep('c', 3)
+#' interleave(x1, x2, x3)
+#'
+#' x4 <- rep('d', 5)
+#' interleave(x1, x4)
 #'
 #' @export
 #'
-#' TODO: write separate methods for numeric, character and factor
 
-interleave <- function(x, y) {
-  if (is.integer(x)) class(x) <- 'double'
-  if (is.integer(y)) class(y) <- 'double'
-  stopifnot(typeof(x) == typeof(y))
+interleave <- function(..., useNAs = TRUE) {
+  vectors <- list(...)
+  longest <- max(vapply(vectors, length, numeric(1)))
 
-  if (length(x) != length(y)) {
-    if (length(x) < length(y)) {
-      shorter.vector <- x
-      longer.vector <- y
-    } else {
-      shorter.vector <- y
-      longer.vector <- x
-    }
+  res <- vector('list', length = longest)
+  for (i in 1:longest) {
+    res[[i]] <- sapply(vectors, function(x) x[i])
   }
-  length.longer <- length(longer.vector)
-  length.shorter <- length(shorter.vector)
+  # alternative method
+  #res <- lapply(1:longest, function(x) sapply(vectors, function(y) y[x]))
+  ans <- do.call(c, res)
 
-  xy <- vector('list', length = length.longer)
-  i = 0
-  while (i < length.shorter) {
-    i = i + 1
-    xy[[i]] <- c(x[i], y[i])
+  # to preserve original NAs
+  if (useNAa && anyNA(unlist(vectors))) {
+    NAs_vectors <- lapply(vectors, is.na)
+    NAs_interleaved <- interleave(NA_vectors)
+    NAs_now <- is.na(NAs_interleaved)
+    ans <- ans[!NAs_now]
   }
-  while (i < length.longer) {
-    i = i + 1
-    xy[[i]] <- longer.vector[i]
-  }
-  do.call('c', xy)
+
+  return(ans)
 }
+
+
+# interleave2 <- function(...) {
+#   vectors <- list(...)
+#   longest <- max(vapply(vectors, length, numeric(1)))
+#
+#   res <- lapply(1:longest, function(x) sapply(vectors, function(y) y[x]))
+#   ans <- do.call(c, res)
+#
+#   # to preserve original NAs
+#   if (useNAs && anyNA(unlist(vectors))) {
+#     NAs_vectors <- lapply(vectors, is.na)
+#     NAs_interleaved <- interleave(NA_vectors)
+#     NAs_now <- is.na(NAs_interleaved)
+#     ans <- ans[!NAs_now]
+#   }
+#
+#   return(ans)
+# }
+#
+# a <- rep(TRUE, 5)
+# b <- rep(FALSE, 5)
+# microbenchmark::microbenchmark(loop = interleave(a,b), lapply = interleave2(a,b))

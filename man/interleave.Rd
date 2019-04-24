@@ -2,14 +2,29 @@
 % Please edit documentation in R/fun-interleave.R
 \name{interleave}
 \alias{interleave}
-\title{interleave two vectors}
+\title{interleave vectors}
 \usage{
-interleave(x, y)
+interleave(..., useNAs = TRUE)
 }
 \arguments{
-\item{x, y}{vectors}
+\item{...}{any number vectors}
+
+\item{useNAs}{logical flag whether preexisting NAs should be preserved}
+}
+\value{
+a single interleaved vector
 }
 \description{
-Given two vectors, x and y, outputs a vector x1, y1, x2, y2, etc.
-Currently only supports two vectors.
+Given a number vectors, e.g. x, y and z, outputs a vector x1, y1, z1, x2, y2, z2, etc.
+If the vectors are of different types, they are coerced as usual.
+}
+\examples{
+x1 <- rep('a', 3)
+x2 <- rep('b', 3)
+x3 <- rep('c', 3)
+interleave(x1, x2, x3)
+
+x4 <- rep('d', 5)
+interleave(x1, x4)
+
 }
