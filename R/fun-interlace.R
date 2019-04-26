@@ -1,4 +1,4 @@
-#' interleave vectors
+#' interlace vectors
 #'
 #' Given a number vectors, e.g. x, y and z, outputs a vector x1, y1, z1, x2, y2, z2, etc.
 #' If the vectors are of different types, they are coerced as usual.
@@ -6,21 +6,21 @@
 #' @param ... any number vectors
 #' @param useNAs logical flag whether preexisting NAs should be preserved
 #'
-#' @return a single interleaved vector
+#' @return a single interlaced vector
 #'
 #' @examples
 #' x1 <- rep('a', 3)
 #' x2 <- rep('b', 3)
 #' x3 <- rep('c', 3)
-#' interleave(x1, x2, x3)
+#' interlace(x1, x2, x3)
 #'
 #' x4 <- rep('d', 5)
-#' interleave(x1, x4)
+#' interlace(x1, x4)
 #'
 #' @export
 #'
 
-interleave <- function(..., useNAs = TRUE) {
+interlace <- function(..., useNAs = TRUE) {
   vectors <- list(...)
   longest <- max(vapply(vectors, length, numeric(1)))
 
@@ -35,8 +35,8 @@ interleave <- function(..., useNAs = TRUE) {
   # to preserve original NAs
   if (useNAa && anyNA(unlist(vectors))) {
     NAs_vectors <- lapply(vectors, is.na)
-    NAs_interleaved <- interleave(NA_vectors)
-    NAs_now <- is.na(NAs_interleaved)
+    NAs_interlaced <- interlace(NA_vectors)
+    NAs_now <- is.na(NAs_interlaced)
     ans <- ans[!NAs_now]
   }
 
@@ -44,7 +44,7 @@ interleave <- function(..., useNAs = TRUE) {
 }
 
 
-# interleave2 <- function(...) {
+# interlace2 <- function(...) {
 #   vectors <- list(...)
 #   longest <- max(vapply(vectors, length, numeric(1)))
 #
@@ -54,8 +54,8 @@ interleave <- function(..., useNAs = TRUE) {
 #   # to preserve original NAs
 #   if (useNAs && anyNA(unlist(vectors))) {
 #     NAs_vectors <- lapply(vectors, is.na)
-#     NAs_interleaved <- interleave(NA_vectors)
-#     NAs_now <- is.na(NAs_interleaved)
+#     NAs_interlaced <- interlace(NA_vectors)
+#     NAs_now <- is.na(NAs_interlaced)
 #     ans <- ans[!NAs_now]
 #   }
 #
@@ -64,4 +64,4 @@ interleave <- function(..., useNAs = TRUE) {
 #
 # a <- rep(TRUE, 5)
 # b <- rep(FALSE, 5)
-# microbenchmark::microbenchmark(loop = interleave(a,b), lapply = interleave2(a,b))
+# microbenchmark::microbenchmark(loop = interlace(a,b), lapply = interlace2(a,b))
