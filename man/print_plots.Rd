@@ -7,12 +7,12 @@
 print_plots(file = "some_plots.pdf", pattern = "plot\\\\.[0-9]+", ...)
 }
 \arguments{
+\item{file}{file to print to}
+
 \item{pattern}{regular expression to locate plot objects by}
 
 \item{...}{arguments passed to other functions,
 specifically \code{width} and \code{height} to \code{pdf}}
-
-\item{filename}{file to print to}
 }
 \description{
 Gather multipel existing ggplot objects and print them to one file

@@ -10,7 +10,7 @@
 #'
 #' NULL objects will be ignored
 #'
-#' @param filename file to print to
+#' @param file file to print to
 #' @param pattern regular expression to locate plot objects by
 #' @param ... arguments passed to other functions,
 #'            specifically \code{width} and \code{height} to \code{pdf}
@@ -27,9 +27,9 @@ print_plots <- function(file = 'some_plots.pdf', pattern = 'plot\\.[0-9]+', ...)
   # get all the plots into a list
   plot_list <- mget(plot_names, envir = parent.frame())
   # open graphics device, print (explicitly) and close
-  pdf(file = file, ...)
+  grDevices::pdf(file = file, ...)
   lapply(plot_list, print)
-  dev.off()
+  grDevices::dev.off()
   message('plots have been printed')
 }
 

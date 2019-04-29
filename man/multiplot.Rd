@@ -32,7 +32,7 @@ then plot 1 will go in the upper left, 2 will go in the upper right, and
 
 \section{Reference}{
 
-\href{http://www.cookbook-r.com/Graphs/
-Multiple_graphs_on_one_page_(ggplot2)/}{R Graphics Cookbook} by Winston Chang
+\href{http://www.cookbook-r.com/Graphs/Multiple_graphs_on_one_page_(ggplot2)/}{R Graphics Cookbook}
+by Winston Chang
 }
 

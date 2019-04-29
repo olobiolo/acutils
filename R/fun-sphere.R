@@ -10,6 +10,6 @@
 #' @export
 
 sphere <- function(r, n = 7L) {
-  if (x%%1 != 0 ) stop("no fractions allowed in \"n\"")
+  if (n %% 1 != 0 ) stop("no fractions allowed in \"n\"")
   (pi^(n/2) * r^n) / gamma(1 + n/2)
 }

@@ -17,8 +17,8 @@
 #' 3 will go all the way across the bottom.
 #'
 #' @section Reference:
-#' \href{http://www.cookbook-r.com/Graphs/
-#' Multiple_graphs_on_one_page_(ggplot2)/}{R Graphics Cookbook} by Winston Chang
+#' \href{http://www.cookbook-r.com/Graphs/Multiple_graphs_on_one_page_(ggplot2)/}{R Graphics Cookbook}
+#' by Winston Chang
 #'
 #' @import grid
 #' @export

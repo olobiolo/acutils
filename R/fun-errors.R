@@ -34,7 +34,7 @@ sem <- function(x, na.rm = TRUE) {
   #' the square root of the number of elements
   if (!is.numeric(x)) stop("\"x\" must be numeric")
   if (na.rm) x <- x[!is.na(x)]
-  sd(x) / sqrt(length(x))
+  stats::sd(x) / sqrt(length(x))
 }
 
 #' @inheritParams sem
@@ -49,5 +49,5 @@ conf <- function(x, na.rm = TRUE, confidence = 0.99) {
   if (!is.numeric(x)) stop("\"x\" must be numeric")
   if (na.rm) x <- x[!is.na(x)]
   to_quantile <- 1 - ((1 - confidence) / 2)
-  qt(to_quantile, df = length(x) - 1) * sd(x) / sqrt(length(x))
+  stats::qt(to_quantile, df = length(x) - 1) * stats::sd(x) / sqrt(length(x))
 }

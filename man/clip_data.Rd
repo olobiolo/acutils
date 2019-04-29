@@ -26,6 +26,8 @@ of values to be removed, see \code{Details}}
 
 \item{preserve.order}{logical flag whether result should be returned
 sorted or in the original order (default)}
+
+\item{column}{(quoted) name of column to clip}
 }
 \value{
 A clipped vector or data frame.

@@ -53,15 +53,15 @@ zscore <- function(x, robust = TRUE, deviations = FALSE, reference = NULL) {
     if (deviations) {
       0
     } else if (robust) {
-      median(ref, na.rm = TRUE)
+      stats::median(ref, na.rm = TRUE)
     } else {
       mean(ref, na.rm = TRUE)
     }
   disp <-
     if (robust) {
-      mad(ref, na.rm = TRUE)
+      stats::mad(ref, na.rm = TRUE)
     } else {
-      mean(ref, na.rm = TRUE)
+      stats::sd(ref, na.rm = TRUE)
     }
 
   zsc <- (x - loc) / disp

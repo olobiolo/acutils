@@ -8,7 +8,7 @@
 \alias{insert_zeros.default}
 \title{insert zeros into a character vector}
 \usage{
-insert_zeros(x, zeros = "auto", after = 1, ...)
+insert_zeros(x, zeros = "auto", after = 1)
 
 \method{insert_zeros}{character}(x, zeros = "auto", after = 1)
 
@@ -51,13 +51,3 @@ so that all elements of \code{X} have an equal number of characters.
 \item \code{default}: throws error for non-supperted classes
 }}
 
-\examples{
-insert_zeros("A1")
-
-v <- paste0(LETTERS[1:10], 1:10)
-rbind("original" = v,
-      "auto" = insert_zeros(v),
-      "force 1 zero" = insert_zeros(v, 1),
-      "force after 2nd char" = insert_zeros(v, after = 2))
-
-}

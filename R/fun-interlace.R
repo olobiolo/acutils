@@ -33,9 +33,9 @@ interlace <- function(..., useNAs = TRUE) {
   ans <- do.call(c, res)
 
   # to preserve original NAs
-  if (useNAa && anyNA(unlist(vectors))) {
+  if (useNAs && anyNA(unlist(vectors))) {
     NAs_vectors <- lapply(vectors, is.na)
-    NAs_interlaced <- interlace(NA_vectors)
+    NAs_interlaced <- interlace(NAs_vectors)
     NAs_now <- is.na(NAs_interlaced)
     ans <- ans[!NAs_now]
   }
