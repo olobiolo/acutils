@@ -12,9 +12,9 @@ LazyData: true
 Depends: R (>= 3.5.0)
 Imports: 
     magrittr (>= 1.5),
-    dplyr (>= 0.8.0.1),
-    tidyr (>= 0.8.3),
-    ggplot2 (>= 3.1.1),
+    dplyr (>= 0.7.8),
+    tidyr (>= 0.8.2),
+    ggplot2 (>= 3.1.0),
     data.table (>= 1.12.2),
     lubridate (>= 1.7.4),
     grid (>= 3.5.3)
