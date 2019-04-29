@@ -27,5 +27,5 @@ The names are cumbersome and when loaded with \code{check.names = TRUE}, they ca
 Usually most of these can be removed without any percievable loss.
 
 This is a simple stream of gsub calls that removes superfluous information from the column names.
-It also improves the formatting. \link{make.names} is run first.
+It also improves the formatting. \code{\link{make.names}} is run first.
 }

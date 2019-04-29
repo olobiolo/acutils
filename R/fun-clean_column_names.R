@@ -8,7 +8,7 @@
 #' Usually most of these can be removed without any percievable loss.
 #'
 #' This is a simple stream of gsub calls that removes superfluous information from the column names.
-#' It also improves the formatting. \link{make.names} is run first.
+#' It also improves the formatting. \code{\link{make.names}} is run first.
 #'
 #' @param x a \code{data frame}
 #' @param gate gate name to be cleared, given as a regular expression;
