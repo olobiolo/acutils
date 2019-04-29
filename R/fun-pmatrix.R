@@ -1,5 +1,3 @@
-#' quick peek at a plate layout
-#'
 #' @section Feature display:
 #' Each feature of the plate is represented as a matrix corresponding to the plate
 #' dimensions. The format is determined based on the well number.
@@ -14,8 +12,8 @@
 #' @param rows,cols backup for supplying non-standard matrix dimensions
 #'
 #' @export
-#'
 #' @describeIn plates
+#'
 
 pmatrix <- function(x, rows, cols) {
   #' quick peek at a layout matrix

@@ -5,7 +5,7 @@
 \alias{empty.plate}
 \alias{plates}
 \alias{pmatrix}
-\title{creats a plate layout scaffold}
+\title{plate functions}
 \usage{
 empty.plate(wells = 384)
 
@@ -22,8 +22,6 @@ pmatrix(x, rows, cols)
 a data frame or a NULL if the format is not supported
 }
 \description{
-Create an empty plate in the form of a data frame.
-
 Create and examine plate layouts.
 }
 \details{

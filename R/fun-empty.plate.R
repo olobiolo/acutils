@@ -1,7 +1,3 @@
-#' creats a plate layout scaffold
-#'
-#' Create an empty plate in the form of a data frame.
-#'
 #' @section Scaffold:
 #' The scaffold is a data frame with three columns: well, row, and column.
 #' Rows and columns are numbered as the given format requires, e.g.
