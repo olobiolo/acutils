@@ -16,10 +16,13 @@
 #'
 #' @export
 
-construct.names <- function(data, dictionary = '../constructs.txt') {
+construct.names <- function(data, dictionary) {
+  if (missing(dictionsry)) dictionary <- paste(path.package('acutils'), 'data', 'constructs.txt', sep = '/')
+  if (is.character(dictionary)) dictionary <- utils::read.delim(dictionary, stringsAsFactors = FALSE)
+
   if (!'cells' %in% names(data)) stop('column "cells" missing from data')
   if ('293' %in% data$cells | 'HeLa' %in% data$cells) message('empty cell lines detected')
-  if (is.character(dictionary)) dic <- read.delim(dictionary) else dic <- dictionary
+
   dic$cells <- as.character(dic$cells)
   data$cells <- as.character(data$cells)
   CDa <- data$cells %>% unique %>% setdiff(., NA)
