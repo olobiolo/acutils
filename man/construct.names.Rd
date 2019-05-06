@@ -9,7 +9,7 @@ construct.names(data, dictionary)
 \arguments{
 \item{data}{a \code{data.frame}; must contain a column called \code{cells}}
 
-\item{dictionary}{either a dictionary \code{data.frame} or path to file containing one}
+\item{dictionary}{optional dictionary file or object, see \code{Details}}
 }
 \value{
 a modified data frame
@@ -18,8 +18,13 @@ a modified data frame
 Convert construct numbers in the RSz series to their contents (inserts).
 }
 \details{
-The function utilizes a dictionary table to modify the \code{cells} column
-in \code{data} accordingly. This must be supplied as a data frame or
-a tab-delimited text file.
-Factors are converted to character.
+The function utilizes a dictionary table to modify the "cells" column
+in \code{data} accordingly. By default this is taken from a file in the package's
+\code{data} directory, which can be replaced or modified at will as long as it
+is a tab delimited .txt file with two columns: "cells" and "insert".
+
+Alternatively a custom file or a data frame object can be provided. The same restrictions apply.
+
+Empty cell lines can be (and indeed are) placed in the dictionary.
+Their "insert" field is the same as their "cells" filed.
 }

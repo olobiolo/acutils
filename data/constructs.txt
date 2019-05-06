@@ -1,0 +1,16 @@
+cells	insert
+293	293
+HeLa	HeLa
+448	PNP.wt-FLAG_res.siPN1
+449	PNP.wt-FLAG_res.siPN2
+758	EGFP-XRN2
+760	XRN2-EGFP
+856	SUV3.wt
+896	SUV3.wt-FLAG
+897	SUV3.G207V-FLAG
+898	SUV3.G207V
+HeLa transfected w/ pRS.611-620_nt	empty_plasmid
+HeLa transfected w/ pRS.611-620_611	PNP_miRNA_setA_C-EGFP_mCherry-NLS_plasmid
+HeLa transfected w/ pRS.611-620_612	PNP_miRNA_setA_PNP-EGFP_mCherry-NLS_plasmid
+HeLa transfected w/ pRS.611-620_618	PNP_miRNA_setB_C-EGFP_mCherry-NLS_plasmid
+HeLa transfected w/ pRS.611-620_619	PNP_miRNA_setB_PNP-EGFP_mCherry-NLS_plasmid
