@@ -1,4 +1,4 @@
-#' translate RSz construct names
+#' translate construct names
 #'
 #' Convert construct numbers to their contents (inserts).
 #'

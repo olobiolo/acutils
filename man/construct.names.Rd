@@ -2,7 +2,7 @@
 % Please edit documentation in R/fun-construct.names.R
 \name{construct.names}
 \alias{construct.names}
-\title{translate RSz construct names}
+\title{translate construct names}
 \usage{
 construct.names(data, dictionary)
 }
