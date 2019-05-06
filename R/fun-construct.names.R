@@ -19,6 +19,13 @@
 construct.names <- function(data, dictionary) {
   if (missing(dictionsry)) dictionary <- paste(path.package('acutils'), 'data', 'constructs.txt', sep = '/')
   if (is.character(dictionary)) dictionary <- utils::read.delim(dictionary, stringsAsFactors = FALSE)
+  if (!is.data.frame(dictionary)) stop('"key" must be a data frame or a path to a file containing one')
+  if (any(sapply(dictionary, is.factor))) {
+    key <- cbind(
+      Filter(Negate(is.factor), dictionary),
+      as.data.frame(lapply(Filter(Negate(is.factor), dictionary), factor))
+    )
+  }
 
   if (!'cells' %in% names(data)) stop('column "cells" missing from data')
   if ('293' %in% data$cells | 'HeLa' %in% data$cells) message('empty cell lines detected')

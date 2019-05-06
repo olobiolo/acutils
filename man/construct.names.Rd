@@ -4,7 +4,7 @@
 \alias{construct.names}
 \title{translate RSz construct names}
 \usage{
-construct.names(data, dictionary = "../constructs.txt")
+construct.names(data, dictionary)
 }
 \arguments{
 \item{data}{a \code{data.frame}; must contain a column called \code{cells}}
