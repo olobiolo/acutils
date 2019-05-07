@@ -40,8 +40,8 @@ rename_reference_observations <-
     if (!missing(Replacers) && !is.character(Replacers)) stop('"Replacers" must be a character vector')
 
     # if X is grouped, the grouping must be stripped and grouping variables saved to be reapplied later
-    is_it_grouped <- is.grouped_df(X)
-    if (is_it_grouped) {grouping <- group_vars(X); X <- ungroup(X)}
+    is_it_grouped <- dplyr::is.grouped_df(X)
+    if (is_it_grouped) {grouping <- dplyr::group_vars(X); X <- dplyr::ungroup(X)}
 
     # if Variable is a factor, save its levels and convert to character
     is_it_a_factor <- is.factor(X[[In_Variable]])
@@ -53,7 +53,7 @@ rename_reference_observations <-
 
     # see what values there are to replace
     if (missing(Replacers)) Replacers <- X[[In_Variable]] %>%
-    {if(is_is_a_factor) levs else unique(.) %>% setdiff(., Replacee)}
+    {if(is_it_a_factor) levs else unique(.) %>% setdiff(., Replacee)}
 
     # define function that replaces one value with another
     rename_reference <- function(x, in_variable, replacee, replacer) {

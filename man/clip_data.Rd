@@ -8,15 +8,15 @@
 \alias{clip_data.data.frame}
 \title{remove extreme values from a vector}
 \usage{
-clip_data(x, clip = 1L, preserve.order = TRUE)
+clip_data(x, clip = 1L, ...)
 
-\method{clip_data}{default}(x, clip = 1L, preserve.order = TRUE)
+\method{clip_data}{default}(x, clip = 1L, preserve.order = TRUE, ...)
 
-\method{clip_data}{factor}(x, clip = 1L, preserve.order = TRUE)
+\method{clip_data}{factor}(x, clip = 1L, preserve.order = TRUE, ...)
 
-\method{clip_data}{numeric}(x, clip = 1L, preserve.order = TRUE)
+\method{clip_data}{numeric}(x, clip = 1L, preserve.order = TRUE, ...)
 
-\method{clip_data}{data.frame}(x, clip = 1L, column)
+\method{clip_data}{data.frame}(x, clip = 1L, column, ...)
 }
 \arguments{
 \item{x}{a vector or a data frame}
@@ -24,8 +24,12 @@ clip_data(x, clip = 1L, preserve.order = TRUE)
 \item{clip}{\strong{either} number(s) or fraction(s) (rounding up)
 of values to be removed, see \code{Details}}
 
+\item{...}{arguments passed to other methods}
+
 \item{preserve.order}{logical flag whether result should be returned
 sorted or in the original order (default)}
+
+\item{column}{for \code{data.frame} method, name of column to clip}
 }
 \value{
 A clipped vector or data frame.

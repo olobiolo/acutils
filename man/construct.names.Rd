@@ -18,17 +18,20 @@ a modified data frame
 Convert construct numbers to their contents (inserts).
 }
 \details{
-When planning an experiment it is common to use names of constructs rather than
-the often lengthy descriptions of their inserts. This also helps when creating layout files, etc.
-However, the insert names have to be introduced eventually so that figures are readable
-and that may take a lot of typing.
+When planning an experiment it is common to use names of constructs
+rather than the often lengthy descriptions of their inserts.
+This also helps when creating layout files, etc.
+However, the insert names have to be introduced eventually
+so that figures are readable and that may take a lot of typing.
 
 The function utilizes a dictionary table to modify the "cells" column
 in \code{data} accordingly. By default this is taken from a file in the package's
-\code{data} directory, which can be replaced or modified at will as long as it
+\code{extdata} directory, which can be replaced or modified at will as long as it
 is a tab delimited .txt file with two columns: "cells" and "insert".
+(You can find the package directory with \code{path.package('acutils')}).
 
-Alternatively a custom file or a data frame object can be provided. The same restrictions apply.
+Alternatively a custom file or a data frame object can be provided.
+The same restrictions apply.
 
 Empty cell lines can be (and indeed are) placed in the dictionary.
 Their "insert" field is the same as their "cells" filed.

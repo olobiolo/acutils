@@ -15,15 +15,22 @@
 #'
 #' @return a data frame
 #'
-#' @importFrom magrittr %>%
-#'
 #' @export
+#'
+# #' @examples
+# #' d <- read.delim('data/example_parameter_file.txt')
+# #' dd <- freader('data/example_parameter_file.txt')
+# #' ddd <- freader('data/example_parameter_file.txt', pattern = '_|green|red|black')
+# #' head(d)
+# #' head(dd)
+# #' head(ddd)
+#'
 
 freader <- function(path, pattern = '_') {
   data.table::fread(path, check.names = TRUE) %>%
-    dplyr::filter(nuclei == 1) %>%
-    dplyr::rename(well = Parent.Object.ID..Well.) %>%
-    dplyr::mutate(well = well + 1) %>%
-    dplyr::select(well, dplyr::matches(pattern)) %>%
+    dplyr::filter('nuclei == 1') %>%
+    dplyr::rename('well = Parent.Object.ID..Well.') %>%
+    dplyr::mutate('well = well + 1') %>%
+    dplyr::select('well', dplyr::matches(pattern)) %>%
     data.frame(stringsAsFactors = FALSE)
 }

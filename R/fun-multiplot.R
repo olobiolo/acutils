@@ -7,7 +7,7 @@
 #' @param plotlist list of plot objects
 #' @param file path to file to print the plots into (?)
 #' @param cols number of columns to arrange the plots into
-#' @param layout matrix specifying the layout as explained in \code{\link{graphics::layout}};
+#' @param layout matrix specifying the layout as explained in \code{graphics::layout};
 #'               if present, \code{cols} is ignored
 #'
 #' @section Layout:
@@ -17,8 +17,8 @@
 #' 3 will go all the way across the bottom.
 #'
 #' @section Reference:
-#' \href{http://www.cookbook-r.com/Graphs/
-#' Multiple_graphs_on_one_page_(ggplot2)/}{R Graphics Cookbook} by Winston Chang
+#' \href{http://www.cookbook-r.com/Graphs/Multiple_graphs_on_one_page_(ggplot2)/}{R Graphics Cookbook}
+#' by Winston Chang
 #'
 #' @import grid
 #' @export

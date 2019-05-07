@@ -1,6 +1,5 @@
 #' @name errors
 #'
-#'
 #' @title error functions
 #'
 #' @description

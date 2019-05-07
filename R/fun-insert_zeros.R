@@ -17,19 +17,10 @@
 #'
 #' @return Modified character vector, where strings of zeros have been inserted at the specified position.
 #'
-#' @examples
-#' insert_zeros("A1")
-#'
-#' v <- paste0(LETTERS[1:10], 1:10)
-#' rbind("original" = v,
-#'       "auto" = insert_zeros(v),
-#'       "force 1 zero" = insert_zeros(v, 1),
-#'       "force after 2nd char" = insert_zeros(v, after = 2))
-#'
 #' @export
 #'
 
-insert_zeros <- function(x, zeros = 'auto', after = 1, ...) {
+insert_zeros <- function(x, zeros = 'auto', after = 1) {
   UseMethod('insert_zeros')
 }
 
@@ -89,3 +80,11 @@ insert_zeros.default <- function(x) {
   stop('insert_zeros doesn\'t know how to handle class ', class(x), call. = FALSE)
 }
 
+#' @examples
+#' insert_zeros("A1")
+#'
+#' v <- paste0(LETTERS[1:10], 1:10)
+#' rbind("original" = v,
+#'       "auto" = insert_zeros(v),
+#'       "force 1 zero" = insert_zeros(v, 1),
+#'       "force after 2nd char" = insert_zeros(v, after = 2))

@@ -11,10 +11,10 @@
 #' @export
 
 show_colors <- function(color) {
-  par(mar = c(5,11,4,2) + 0.1)
-  on.exit(par(mar = c(5,4,4,2) + 0.1))
+  graphics::par(mar = c(5,11,4,2) + 0.1)
+  on.exit(graphics::par(mar = c(5,4,4,2) + 0.1))
   if (!is.character(color)) stop('"color" must be a regular expression')
-  color_group <- grep(color, colors(), value = T)
+  color_group <- grep(color, grDevices::colors(), value = T)
   L <- length(color_group)
   if (L == 0) stop('no colors match the given name')
 

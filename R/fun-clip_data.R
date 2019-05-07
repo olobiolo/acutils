@@ -24,6 +24,8 @@
 #'             of values to be removed, see \code{Details}
 #' @param preserve.order logical flag whether result should be returned
 #'                        sorted or in the original order (default)
+#' @param column for \code{data.frame} method, name of column to clip
+##' @param ... arguments passed to other methods
 #'
 #' @return A clipped vector or data frame.
 #'
@@ -32,7 +34,7 @@
 #' @export
 #'
 
-clip_data <- function(x, clip = 1L, preserve.order = TRUE) {
+clip_data <- function(x, clip = 1L, ...) {
   # check arguments
   if (all(clip == 0)) {
     message('odd choice of clipping, returning unchanged')
@@ -53,7 +55,7 @@ clip_data <- function(x, clip = 1L, preserve.order = TRUE) {
 
 #' @export
 #' @describeIn clip_data
-clip_data.default <- function(x, clip = 1L, preserve.order = TRUE) {
+clip_data.default <- function(x, clip = 1L, preserve.order = TRUE, ...) {
   #' default method
 
   # store original names
@@ -91,15 +93,15 @@ clip_data.default <- function(x, clip = 1L, preserve.order = TRUE) {
   }
 
   if (was_named)
-    y <- setNames(Y, original_names[which(x %in% Y)]) else
-      y <- setNames(Y, NULL)
+    y <- stats::setNames(Y, original_names[which(x %in% Y)]) else
+      y <- stats::setNames(Y, NULL)
 
   return(y)
 }
 
 #' @export
 #' @describeIn clip_data
-clip_data.factor <- function(x, clip = 1L, preserve.order = TRUE) {
+clip_data.factor <- function(x, clip = 1L, preserve.order = TRUE, ...) {
   #' coerces \code{x} to characer, calls the character method, and restores the original levels
   lvls <- levels(x)
   xc <- as.character(x)
@@ -111,12 +113,12 @@ clip_data.factor <- function(x, clip = 1L, preserve.order = TRUE) {
 
 #' @export
 #' @describeIn clip_data
-clip_data.numeric <- function(x, clip = 1L, preserve.order = TRUE) {
+clip_data.numeric <- function(x, clip = 1L, preserve.order = TRUE, ...) {
   #' adds a location check
   y <- clip_data.default(x, clip = clip, preserve.order = preserve.order)
   # check and report how the clipping affected the mean of the data
   change <- tryCatch(
-    t.test(x,y, alternative = 'two.sided', paired = FALSE),
+    stats::t.test(x,y, alternative = 'two.sided', paired = FALSE),
     error = function(e) {
       message('from t.test: data are essentially unchanged')
       return(list(p.value = 1))
@@ -132,7 +134,7 @@ clip_data.numeric <- function(x, clip = 1L, preserve.order = TRUE) {
 
 #' @export
 #' @describeIn clip_data
-clip_data.data.frame <- function(x, clip = 1L, column) {
+clip_data.data.frame <- function(x, clip = 1L, column, ...) {
   #' clips the specified column and test all numeric columns for changes
   # check argument
   if (!all(is.character(column), length(column) == 1)) stop('"column" must be a character of length 1')
@@ -154,7 +156,7 @@ clip_data.data.frame <- function(x, clip = 1L, column) {
 
   # create index of remaining values and use it to drop rows from the data frame
   ind <- thecolumn %in% thecolumn_clipped
-  X <- x[ind, ]
+  X <- x[ind, , drop = FALSE]
 
   # report number of values removed, if fractions were requested
   if (all(clip < 1)) {
@@ -165,9 +167,9 @@ clip_data.data.frame <- function(x, clip = 1L, column) {
   # check and report how the clipping affected the mean of all numeric data frames
   xX <- cbind(rbind(x, X), clipped = c(rep('pre', nrow(x)), rep('post', nrow(X))))
   formula_strings <- lapply(numeric_columns, function(x) paste(x, '~', 'clipped'))
-  formulas <- lapply(formula_strings, as.formula)
+  formulas <- lapply(formula_strings, stats::as.formula)
   models <- lapply(formulas, function(f) tryCatch(
-    t.test(f, data = xX, alternative = 'two.sided', paired = FALSE),
+    stats::t.test(f, data = xX, alternative = 'two.sided', paired = FALSE),
     error = function(e) return(list(p.value = 1)) ) )
   pvals <- sapply(models, function(x) x$p.value)
   if (any(pvals < 0.05)) {
