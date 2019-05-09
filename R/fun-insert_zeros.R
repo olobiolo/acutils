@@ -24,6 +24,7 @@ insert_zeros <- function(x, zeros = 'auto', after = 1) {
   UseMethod('insert_zeros')
 }
 
+#' @export
 #' @describeIn insert_zeros
 insert_zeros.character <- function(x, zeros = 'auto', after = 1) {
   #' the basic method
@@ -56,6 +57,7 @@ insert_zeros.character <- function(x, zeros = 'auto', after = 1) {
   vapply(x, paster, USE.NAMES = FALSE, FUN.VALUE = character(1))
 }
 
+#' @export
 #' @describeIn insert_zeros
 insert_zeros.factor <- function(x, zeros = 'auto', after = 1) {
 #' runs on levels of x rather than its body
@@ -66,6 +68,7 @@ insert_zeros.factor <- function(x, zeros = 'auto', after = 1) {
   return(x)
 }
 
+#' @export
 #' @describeIn insert_zeros
 insert_zeros.numeric <- function(x, zeros = 'auto', after = 1) {
 #' coerces to character and passes to character method
@@ -74,6 +77,7 @@ insert_zeros.numeric <- function(x, zeros = 'auto', after = 1) {
   insert_zeros.character(x)
 }
 
+#' @export
 #' @describeIn insert_zeros
 insert_zeros.default <- function(x) {
   #' throws error for non-supperted classes
