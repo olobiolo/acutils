@@ -28,7 +28,7 @@
 
 freader <- function(path, pattern = '_') {
   data.table::fread(path, check.names = TRUE) %>%
-    dplyr::filter('nuclei == 1') %>%
+    dplyr::filter(nuclei == 1) %>%
     dplyr::rename('well = Parent.Object.ID..Well.') %>%
     dplyr::mutate('well = well + 1') %>%
     dplyr::select('well', dplyr::matches(pattern)) %>%
