@@ -5,6 +5,7 @@
 #' @name ggthemes
 NULL
 
+#' @export
 #' @describeIn ggthemes
 center_titles <- function() {
   #' called from global environment;
@@ -14,6 +15,7 @@ center_titles <- function() {
     plot.subtitle = ggplot2::element_text(hjust = 0.5)
   )
 }
+#' @export
 #' @describeIn ggthemes
 rotate_labels <- function() {
   #' added to ggplot object;
