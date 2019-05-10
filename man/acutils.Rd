@@ -30,6 +30,9 @@ Some are specifically designed to deal with ScanR data.
       \item{\code{cilp_data}
       removes extreme elements of a vector or data frame
       }
+      \item{\code{center_titles}
+      adjusts ggplot theme so that plot titles are centered
+      }
       \item{\code{conf}
       calculates confidence interval of the mean
       }
@@ -58,6 +61,9 @@ Some are specifically designed to deal with ScanR data.
       \item{\code{rename_reference_observations}
       changes the category labels of reference observations
       so they can be plotted as e.g. "time = 0h" rather than "nt"
+      }
+      \item{\code{rotate_labels}
+      rotates axis text in a ggplot by 90 degrees
       }
       \item{\code{sem}
       calculates standard error of the mean
