@@ -31,17 +31,17 @@ baseline.data.frame <- function(x, variables, reference, method = mean, by_group
   #' and subtracts them from their respective variables using \code{mapply}
 
   # check arguments
-  if (!is.data.frame(x)) stop('"x" must be a data frame')
-  if (!missing(variables) & !all(variables %in% names(x)))
-    stop('invalid variables selected')
-  if (!missing(variables) & !is.character(variables))
-    stop('varaibles must be a character vector')
-  if (!missing(by_group)) if(!all(by_group %in% names(x)))
-    stop('invalid grouping selected: "by_group"')
+  if (!is.data.frame(x)) stop('x must be a data frame')
   if (missing(variables)) {
-    message('no variables selected; taking all numeric variables except "well"')
-    variables <- setdiff(names(Filter(is.numeric, x)), 'well')
+    message('no variables selected; taking all numeric variables except "well" and "column"')
+    variables <- setdiff(names(Filter(is.numeric, x)), c('well', 'column'))
+  } else {
+    if (!is.character(variables)) stop('varaibles must be a character vector')
+    if (!all(variables %in% names(x))) stop('invalid variables selected')
+    if (!all(vapply(x[variables], is.numeric, logical(1)))) stop('non-numeric variables selected')
   }
+  if (!missing(by_group) && !all(by_group %in% names(x))) stop('invalid grouping selected: "by_group"')
+
   # capture logical predicate for subset and, if string, convert to expression
   r <- substitute(reference)
   r <- if (is.call(r)) r else if (is.character(r)) substitute(eval(parse(text = r)))
