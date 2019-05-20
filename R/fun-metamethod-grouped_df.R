@@ -30,7 +30,7 @@
 #'
 #' @return a function: a method for class \code{grouped_df} (from package \code{dplyr})
 #'
-##' @export
+#' @export
 #'
 metamethod <- function(fun) {
   FORMALS <- formals(fun)

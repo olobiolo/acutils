@@ -53,6 +53,10 @@ Some are specifically designed to deal with ScanR data.
       \item{\code{interlace}
       "mixes" several vectors into one
       }
+      \item{\code{metamethod}
+      creates S3 methods for class \code{grouped_df}
+      based on respective methods for class \code{data.frame}
+      }
       \item{\code{multiplot}
       prints multiple ggplot plots on a single page
       }
