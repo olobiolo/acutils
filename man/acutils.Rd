@@ -27,6 +27,10 @@ Some are specifically designed to deal with ScanR data.
   }
   \item{general purpose:
     \itemize{
+      \item{\code{baseline}
+      modifies one or more variables in a data frame
+      by subtracting the mean value of a reference set
+      }
       \item{\code{cilp_data}
       removes extreme elements of a vector or data frame
       }
