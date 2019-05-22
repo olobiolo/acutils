@@ -24,7 +24,7 @@
 #' For deviations the location parameter is assumed to be 0.
 #' If normalization is done by simply subtracting the mean/median of the whole sample
 #' from each data point, this is redundant but other normalization methods
-#' may introduce differences differences.
+#' may introduce differences.
 
 #' @section Reference:
 #' If desired, data points in the sample can be standardized against part of the distribution
