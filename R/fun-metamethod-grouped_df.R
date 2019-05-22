@@ -49,6 +49,8 @@ metamethod <- function(fun) {
       f_list <- as.list(x[dplyr::group_vars(x)])
       # convert x to normal data frame
       X <- data.frame(x)
+      # add temporary id column
+      X$temporary_id_column_9000 <- 1:nrow(X)
       # construct call to by
       new_call <-
         as.call(
@@ -58,6 +60,9 @@ metamethod <- function(fun) {
       y <- eval(new_call)
       # wrap resulting by object to data frame
       Y <- do.call(rbind, y)
+      # reorder and clean up
+      Y <- Y[order(Y$temporary_id_column_9000), ]
+      Y <- Y[-which(names(Y) == 'temporary_id_column_9000')]
       # update column names within the attribute list
       xats$names <- names(Y)
       # restore attributes
