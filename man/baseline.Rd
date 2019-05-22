@@ -29,7 +29,7 @@ in case the baseline is to be taken from means of sets of observations
 rather than from all observations directly}
 }
 \value{
-a modified \code{data.frame}
+a \code{data.frame} with modified variables
 }
 \description{
 Calculate baseline signal and subtract it from all observations.
@@ -39,8 +39,7 @@ Calculate baseline signal and subtract it from all observations.
 \item \code{data.frame}: computes mean/median of desired variables with \code{vapply}
 and subtracts them from their respective variables using \code{mapply}
 
-\item \code{grouped_df}: constructed by \code{\link{acutils::metamethod}}
-saves attributes and grouping variables of \code{x}, captures original call
+\item \code{grouped_df}: saves attributes and grouping variables of \code{x}, captures original call
 and modifies it to be run by \code{by}, then restores attributes
 }}
 
@@ -48,5 +47,12 @@ and modifies it to be run by \code{by}, then restores attributes
 
 The method for class \code{grouped_df} is home brewed as I don't know
 how to properly handle this class.
+}
+
+\section{Warning}{
+
+If \code{reference} should not make use of a grouping variable
+as some groups may end up without reference observations.
+It is safest to create a separate viariable for the purpose of \code{reference}.
 }
 

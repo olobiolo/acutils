@@ -11,11 +11,16 @@
 #'                 in case the baseline is to be taken from means of sets of observations
 #'                 rather than from all observations directly
 #'
-#' @return a modified \code{data.frame}
+#' @return a \code{data.frame} with modified variables
 #'
 #' @section Grouped data frames (\code{dplyr} package):
 #' The method for class \code{grouped_df} is home brewed as I don't know
 #' how to properly handle this class.
+#'
+#' @section Warning:
+#' If \code{reference} should not make use of a grouping variable
+#' as some groups may end up without reference observations.
+#' It is safest to create a separate viariable for the purpose of \code{reference}.
 #'
 #' @export
 #'
@@ -26,9 +31,9 @@ baseline <- function(x, variables, reference, method = mean, by_group) {
 
 #' @export
 #' @describeIn baseline
+#' computes mean/median of desired variables with \code{vapply}
+#' and subtracts them from their respective variables using \code{mapply}
 baseline.data.frame <- function(x, variables, reference, method = mean, by_group) {
-  #' computes mean/median of desired variables with \code{vapply}
-  #' and subtracts them from their respective variables using \code{mapply}
 
   # check arguments
   if (!is.data.frame(x)) stop('x must be a data frame')
@@ -78,11 +83,10 @@ baseline.data.frame <- function(x, variables, reference, method = mean, by_group
 }
 
 #' @export
-#' @describeIn baseline constructed by \code{\link{acutils::metamethod}}
+#' @describeIn baseline
+#' saves attributes and grouping variables of \code{x}, captures original call
+#' and modifies it to be run by \code{by}, then restores attributes
 baseline.grouped_df <- function(x, variables, reference, method = mean, by_group) {
-  #' saves attributes and grouping variables of \code{x}, captures original call
-  #' and modifies it to be run by \code{by}, then restores attributes
-
   # capture call and drop function and data, keeping only additinoal arguments
   original_arguments <- as.list(match.call())[-(1:2)]
   # save attributes of x
@@ -91,6 +95,7 @@ baseline.grouped_df <- function(x, variables, reference, method = mean, by_group
   f_list <- as.list(x[dplyr::group_vars(x)])
   # strip grouping
   x <- data.frame(x)
+  x$temporary_id_column_9000 <- 1:nrow(x)
   # construct new call
   new_call <-
     as.call(
@@ -102,7 +107,10 @@ baseline.grouped_df <- function(x, variables, reference, method = mean, by_group
   y <- eval(new_call)
   # convert to data frame
   Y <- do.call(rbind, y)
-  # re-group
+  # reorder and clean up
+  Y <- Y[order(Y$temporary_id_column_9000), ]
+  Y <- Y[-which(names(Y) == 'temporary_id_column_9000')]
+  # restore attributes
   attributes(Y) <- gats
   return(Y)
 }
@@ -113,7 +121,8 @@ baseline.grouped_df <- function(x, variables, reference, method = mean, by_group
 #   well = 1:100,
 #   int1 = c(rnorm(10, 10, 1), rnorm(10, 150, 2), rnorm(80, 78, 4)),
 #   class = c(rep('low', 10), rep('high', 10), rep('mid', 80)),
-#   plate = 'plate 1'
+#   plate = 'plate 1',
+#   replica = rep(c('replica 1', 'replica 2'), 50)
 #   )
 # x2 <- x1 %>% dplyr::mutate(int1 = int1 * 1.25, plate = 'plate 2')
 # x <- rbind(x1, x2)
