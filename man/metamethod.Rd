@@ -37,8 +37,9 @@ When editing an .R file for generic \code{foo} and its S3 methods,
 simply add another entry where \code{foo.grouped_df} is defined as the result of
 \code{metamethod} acting on \code{foo.data.frame}.
 
-If preceeded with the \code{roxygen} tag
-"\code{@describeIn foo see \code{\link{acutils::metamethod}}}",
-it will show up nicely in the documentation file.
+Copy the following \code{roxygen} tag before the function definition
+to have it show up nicely in the documentation file:
+
+\code{@describeIn foo see \\code{\\link{acutils::metamethod}}}
 }
 
