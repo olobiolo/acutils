@@ -7,7 +7,7 @@
 #' @param reference logical predicate that identifies reference observations, given as string or bare;
 #'                  will be passed to \code{\link{subset}}
 #' @param method method with which to compute the baseline, mean or median; given as symbol or string
-#' @param by_group character vector of variables to group by (\code{\link{dplyr::group_by}})
+#' @param by_group character vector of variables to group by (\code{\link[dplyr]{group_by}})
 #'                 in case the baseline is to be taken from means of sets of observations
 #'                 rather than from all observations directly
 #'

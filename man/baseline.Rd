@@ -24,7 +24,7 @@ will be passed to \code{\link{subset}}}
 
 \item{method}{method with which to compute the baseline, mean or median; given as symbol or string}
 
-\item{by_group}{character vector of variables to group by (\code{\link{dplyr::group_by}})
+\item{by_group}{character vector of variables to group by (\code{\link[dplyr]{group_by}})
 in case the baseline is to be taken from means of sets of observations
 rather than from all observations directly}
 }
