@@ -39,8 +39,7 @@ Calculate baseline signal and subtract it from all observations.
 \item \code{data.frame}: computes mean/median of desired variables with \code{vapply}
 and subtracts them from their respective variables using \code{mapply}
 
-\item \code{grouped_df}: saves attributes and grouping variables of \code{x}, captures original call
-and modifies it to be run by \code{by}, then restores attributes
+\item \code{grouped_df}: see \code{\link[metamethods]{data.frame__to__grouped_df}}
 }}
 
 \section{Grouped data frames (\code{dplyr} package)}{

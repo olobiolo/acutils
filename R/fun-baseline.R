@@ -83,39 +83,8 @@ baseline.data.frame <- function(x, variables, reference, method = mean, by_group
 }
 
 #' @export
-#' @describeIn baseline
-#' saves attributes and grouping variables of \code{x}, captures original call
-#' and modifies it to be run by \code{by}, then restores attributes
-baseline.grouped_df <- function(x, variables, reference, method = mean, by_group) {
-  # capture call and drop function and data, keeping only additinoal arguments
-  original_arguments <- as.list(match.call())[-(1:2)]
-  # save attributes of x
-  gats <- attributes(x)
-  # obtain a list of factors from grouping variables
-  f_list <- as.list(x[dplyr::group_vars(x)])
-  # strip grouping
-  x <- data.frame(x)
-  x$temporary_id_column_9000 <- 1:nrow(x)
-  # construct new call
-  new_call <-
-    as.call(
-      append(
-        list(as.name('by'), data = quote(x), INDICES = quote(f_list), FUN = quote(baseline.data.frame)),
-        original_arguments)
-    )
-  # run the call
-  y <- eval(new_call)
-  # convert to data frame
-  Y <- do.call(rbind, y)
-  # reorder and clean up
-  Y <- Y[order(Y$temporary_id_column_9000), ]
-  Y <- Y[-which(names(Y) == 'temporary_id_column_9000')]
-  # restore attributes
-  attributes(Y) <- gats
-  return(Y)
-}
-
-#baseline.grouped_df <- metamethod(baseline.data.frame)
+#' @describeIn baseline see \code{\link[metamethods]{data.frame__to__grouped_df}}
+baseline.grouped_df <- metamethods::data.frame__to__grouped_df(baseline.data.frame)
 
 # x1 <- data.frame(
 #   well = 1:100,

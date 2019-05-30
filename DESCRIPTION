@@ -18,8 +18,9 @@ Imports:
     data.table (>= 1.12.2),
     lubridate (>= 1.7.4),
     grid (>= 3.5.0),
-    stats (>= 3.5.0),
-    grDevices (>= 3.5.0),
-    graphics (>= 3.5.0),
-    utils (>= 3.5.0)
+    stats,
+    grDevices,
+    graphics,
+    utils,
+    metamethods (>= 0.1.0)
 RoxygenNote: 6.1.1
