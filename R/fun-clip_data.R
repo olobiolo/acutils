@@ -25,7 +25,7 @@
 #' @param preserve.order logical flag whether result should be returned
 #'                        sorted or in the original order (default)
 #' @param column for \code{data.frame} method, name of column to clip
-##' @param ... arguments passed to other methods
+#' @param ... arguments passed to other methods
 #'
 #' @return A clipped vector or data frame.
 #'
@@ -175,7 +175,9 @@ clip_data.data.frame <- function(x, clip = 1L, column, ...) {
   if (any(pvals < 0.05)) {
     significantly_changed <- numeric_columns[which(pvals < 0.05)]
     print_us_please <- paste(significantly_changed, collapse = ', ')
-    warning('clipping significantly changed the mean value of some numeric variables (p < 0.05 in a t test): ', print_us_please, call. = FALSE)
+    warning('clipping significantly changed the mean value
+of some numeric variables (p < 0.05 in a t test): ',
+            print_us_please, call. = FALSE)
   } else {
     message('clipping did not significantly change the mean value (p >= 0.05 in t test)')
   }

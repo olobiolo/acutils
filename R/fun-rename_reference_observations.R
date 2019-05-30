@@ -25,9 +25,7 @@
 #' observations will be returned. It \code{TRUE}, the returned data frame
 #' contains the renamed reference observations as well as the original non-reference observations.
 #'
-#' @importFrom magrittr %>%
 #' @export
-
 
 rename_reference_observations <-
   function(X, In_Variable = 'treatment', Replacee = 'nt', Replacers, return.composite = TRUE) {
@@ -59,16 +57,17 @@ rename_reference_observations <-
     rename_reference <- function(x, in_variable, replacee, replacer) {
       # replace one value by another in a specified (categorical) observation
       # subset data to isolate only the reference observations
-      ref <- subset(x, in_variable == replacee)
-# older version
-# ref <- x[x[[in_variable]] == replacee, ]
+      ref <- x[x[[in_variable]] == replacee, ]
       # replace treatment value
       ref[[in_variable]] <- replacer
       return(ref)
     }
 
-    # run the above function with all elements of Replacers; reaturns set of reference observations
-    refs <- lapply(Replacers, function(r) rename_reference(X, In_Variable, Replacee, r)) %>% do.call(rbind, .)
+    # run the above function with all elements of Replacers
+    # returns set of reference observations
+    refs <-
+      lapply(Replacers, function(r) rename_reference(X, In_Variable, Replacee, r)) %>%
+      do.call(rbind, .)
 
     # return requested value
     if (return.composite) {
@@ -76,12 +75,16 @@ rename_reference_observations <-
       non_refs <- X[X[[In_Variable]] != Replacee, ]
       # combine objects
       Y <- rbind(refs, non_refs)
-      if (is_it_a_factor) Y <- dplyr::mutate_at(Y, In_Variable, function(x) factor(x, levels = levs))
-      if (is_it_grouped) Y <- dplyr::group_by(Y, grouping)
+      if (is_it_a_factor)
+        Y <- dplyr::mutate_at(Y, In_Variable, function(x) factor(x, levels = levs))
+      if (is_it_grouped)
+        Y <- dplyr::group_by(Y, grouping)
       return(Y)
     } else {
-      if (is_it_a_factor) refs <- dplyr::mutate_at(refs, In_Variable, function(x) factor(x, levels = levs))
-      if (is_it_grouped) refs <- dplyr::group_by(refs, grouping)
+      if (is_it_a_factor)
+        refs <- dplyr::mutate_at(refs, In_Variable, function(x) factor(x, levels = levs))
+      if (is_it_grouped)
+        refs <- dplyr::group_by(refs, grouping)
       return(refs)
     }
   }
