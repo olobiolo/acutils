@@ -1,2 +1,2 @@
 # acutils
-# Just some everyday functions.
+Just some everyday functions.
