@@ -18,8 +18,8 @@
 #' how to properly handle this class.
 #'
 #' @section Warning:
-#' If \code{reference} should not make use of a grouping variable
-#' as some groups may end up without reference observations.
+#' Be careful when defining references observations. If a group ends up without reference,
+#' the procedure will crash. \code{reference} should not make use of a grouping variable.
 #' It is safest to create a separate viariable for the purpose of \code{reference}.
 #'
 #' @export
@@ -59,6 +59,7 @@ baseline.data.frame <- function(x, variables, reference, method = mean, by_group
   x_ref <-
     if (missing(reference)) x else
       subset(x, subset = eval(r))
+  if (nrow(x_ref) == 0) stop('reference set is empty; reconsider grouping and reference specification')
   # separate variables to be normalized from remaining ones
   x_vars <- x[variables]
   x_rems <- x[setdiff(names(x), variables)]

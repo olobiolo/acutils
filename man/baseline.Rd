@@ -50,8 +50,8 @@ how to properly handle this class.
 
 \section{Warning}{
 
-If \code{reference} should not make use of a grouping variable
-as some groups may end up without reference observations.
+Be careful when defining references observations. If a group ends up without reference,
+the procedure will crash. \code{reference} should not make use of a grouping variable.
 It is safest to create a separate viariable for the purpose of \code{reference}.
 }
 

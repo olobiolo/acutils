@@ -1,7 +1,7 @@
 Package: acutils
 Type: Package
 Title: Aleks Chlebowski's Utility Functions
-Version: 0.2.0
+Version: 0.3.0
 Author: person('Aleksander', 'Chlebowski', email = 'olobiolo@gmail.com', role = c('aut', 'cre'))
 Maintainer: <olobiolo@gmail.com>
 Description: Some utility functions I frequently use in my day-to-day work.
@@ -24,3 +24,4 @@ Imports:
     utils,
     metamethods (>= 0.1.0)
 RoxygenNote: 6.1.1
+URL: http://github.com/olobiolo/acutils
