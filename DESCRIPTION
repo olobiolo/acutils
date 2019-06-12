@@ -23,5 +23,6 @@ Imports:
     graphics,
     utils,
     metamethods (>= 0.1.4)
+Remotes: olobiolo/metamethods
 RoxygenNote: 6.1.1
 URL: http://github.com/olobiolo/acutils
