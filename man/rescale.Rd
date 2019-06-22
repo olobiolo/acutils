@@ -16,7 +16,7 @@ rescale(x)
 \item{x}{a numeric vector or matrix}
 }
 \value{
-a numeric vector object of the same class as \code{x}
+a numeric object of the same class as \code{x}
 }
 \description{
 Scales a vector. Positive values are scaled from 0 to 1, negative ones are scaled -1 to 0.
