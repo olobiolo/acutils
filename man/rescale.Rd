@@ -6,23 +6,33 @@
 \alias{rescale.matrix}
 \title{scale numeric vector}
 \usage{
-rescale(x, range)
+rescale(x, range = c("positive", "negative", "both"))
 
-\method{rescale}{default}(x, range)
+\method{rescale}{default}(x, range = c("positive", "negative", "both"))
 
-\method{rescale}{matrix}(x, range)
+\method{rescale}{matrix}(x, range = c("positive", "negative", "both"))
 }
 \arguments{
 \item{x}{a numeric vector or matrix}
 
-\item{range}{range which to scale to:
-\code{positive}: [0,1], \code{negative}: [-1,0], \code{both}: [-1,1]}
+\item{range}{range which to scale to}
 }
 \value{
 a numeric object of the same class as \code{x}
 }
 \description{
 Scales a vector to a requested range.
+}
+\details{
+Values in the vector are scaled such to fill \code{range}:
+\itemize{
+  \item{\code{positive}: from 0 to 1
+  }
+  \item{\code{negative}: from -1 to 0
+  }
+  \item{\code{both}: from -1 to 1
+  }
+}
 }
 \section{Methods (by class)}{
 \itemize{
