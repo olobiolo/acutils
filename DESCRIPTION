@@ -1,15 +1,16 @@
-Package: acutils
 Type: Package
+Package: acutils
 Title: Aleks Chlebowski's Utility Functions
-Version: 0.3.4
-Author: person('Aleksander', 'Chlebowski', email = 'olobiolo@gmail.com', role = c('aut', 'cre'))
+Version: 0.3.6
+Author: person('Aleksander', 'Chlebowski', email =
+    'olobiolo@gmail.com', role = c('aut', 'cre'))
 Maintainer: <olobiolo@gmail.com>
-Description: Some utility functions I frequently use in my day-to-day work.
-    Their use by ohters is welcome.
+Description: Some utility functions I frequently use in my
+    day-to-day work. Their use by ohters is welcome.
 License: GPL-3
-Encoding: UTF-8
-LazyData: true
-Depends: R (>= 3.5.0)
+URL: http://github.com/olobiolo/acutils
+Depends: 
+    R (>= 3.5.0)
 Imports: 
     magrittr (>= 1.5),
     dplyr (>= 0.8.0.1),
@@ -23,6 +24,10 @@ Imports:
     graphics,
     utils,
     metamethods (>= 0.1.4)
-Remotes: olobiolo/metamethods
+Suggests: 
+    testthat
+Remotes: 
+    olobiolo/metamethods
+Encoding: UTF-8
+LazyData: true
 RoxygenNote: 6.1.1
-URL: http://github.com/olobiolo/acutils
