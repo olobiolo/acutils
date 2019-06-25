@@ -39,7 +39,7 @@ baseline.data.frame <- function(x, variables, reference, method = mean, by_group
   if (!is.data.frame(x)) stop('x must be a data frame')
   if (missing(variables)) {
     message('no variables selected; taking all numeric variables except "well" and "column"')
-    variables <- setdiff(names(Filter(is.numeric, x)), c('well', 'column', 'temporary_id_column_9000'))
+    variables <- setdiff(names(Filter(is.numeric, x)), c('well', 'column'))
   } else {
     if (!is.character(variables)) stop('varaibles must be a character vector')
     if (!all(variables %in% names(x))) stop('invalid variables selected')
