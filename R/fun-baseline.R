@@ -45,8 +45,8 @@ baseline.data.frame <- function(x, variables, reference, method = mean, by_group
     if (!all(variables %in% names(x))) stop('invalid variables selected')
     if (!all(vapply(x[variables], is.numeric, logical(1)))) stop('non-numeric variables selected')
   }
+  if (missing(reference)) stop('"reference" is missing with no default')
   if (!missing(by_group) && !all(by_group %in% names(x))) stop('invalid grouping selected: "by_group"')
-  force(reference)
 
   # capture logical predicate for subset and, if string, convert to expression
   r <- substitute(reference)
