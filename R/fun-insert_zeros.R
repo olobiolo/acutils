@@ -25,16 +25,15 @@ insert_zeros <- function(x, zeros = 'auto', after = 1) {
 }
 
 #' @export
-#' @describeIn insert_zeros
+#' @describeIn insert_zeros the basic method
 insert_zeros.character <- function(x, zeros = 'auto', after = 1) {
-  #' the basic method
   force(zeros)
   force(after)
   if (zeros < 1) {
     print('waste of time...')
     return(x)
   }
-  if (after < 1) stop('"after" is named "after for a reason')
+  if (after < 0) stop('"after" must not be lower than 0')
   if (after > min(nchar(x), na.rm = TRUE)) stop('some items are too short; "after" too large')
 
   nchar.max <- max(nchar(x), na.rm = TRUE)
@@ -49,18 +48,25 @@ insert_zeros.character <- function(x, zeros = 'auto', after = 1) {
     return(paste(rep('0', n), collapse = ''))
   }
   # create function that inserts the string of zeros to the target string
-  paster <- function(x) {
-    if (is.na(x)) return(x) else
-    paste0(substr(x, 1, after), paste(zero_string(x, zeros), collapse = ''), substr(x, after + 1, nchar(x)))
+  if (after == 0) {
+    paster <- function(x) {
+      if (is.na(x)) return(x) else
+        paste0(paste(zero_string(x, zeros), collapse = ''), x)
+    }
+  } else {
+    paster <- function(x) {
+      if (is.na(x)) return(x) else
+        paste0(substr(x, 1, after), paste(zero_string(x, zeros), collapse = ''), substr(x, after + 1, nchar(x)))
+    }
   }
+
   # apply over X
   vapply(x, paster, USE.NAMES = FALSE, FUN.VALUE = character(1))
 }
 
 #' @export
-#' @describeIn insert_zeros
+#' @describeIn insert_zeros runs on levels of x rather than its body
 insert_zeros.factor <- function(x, zeros = 'auto', after = 1) {
-#' runs on levels of x rather than its body
   message('"x" is a factor, the operation will be run on levels')
   old.levels <- levels(x)
   new.levels <- insert_zeros(old.levels)
@@ -69,18 +75,17 @@ insert_zeros.factor <- function(x, zeros = 'auto', after = 1) {
 }
 
 #' @export
-#' @describeIn insert_zeros
+#' @describeIn insert_zeros coerces to character and passes to character method
 insert_zeros.numeric <- function(x, zeros = 'auto', after = 1) {
-#' coerces to character and passes to character method
   message('"x" is numeric, coercing to character')
   x <- as.character(x)
   insert_zeros.character(x)
 }
 
 #' @export
-#' @describeIn insert_zeros
+#' @describeIn insert_zeros throws error for non-supperted classes
 insert_zeros.default <- function(x) {
-  #' throws error for non-supperted classes
+
   stop('insert_zeros doesn\'t know how to handle class ', class(x), call. = FALSE)
 }
 
@@ -91,4 +96,6 @@ insert_zeros.default <- function(x) {
 #' rbind("original" = v,
 #'       "auto" = insert_zeros(v),
 #'       "force 1 zero" = insert_zeros(v, 1),
-#'       "force after 2nd char" = insert_zeros(v, after = 2))
+#'       "force after 2nd char" = insert_zeros(v, after = 2),
+#'       "force at beginning" = insert_zeros(v, after = 0))
+#'
