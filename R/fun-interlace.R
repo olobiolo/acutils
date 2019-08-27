@@ -24,44 +24,18 @@ interlace <- function(..., useNAs = TRUE) {
   vectors <- list(...)
   longest <- max(vapply(vectors, length, numeric(1)))
 
-  res <- vector('list', length = longest)
-  for (i in 1:longest) {
-    res[[i]] <- sapply(vectors, function(x) x[i])
-  }
-  # alternative method
-  #res <- lapply(1:longest, function(x) sapply(vectors, function(y) y[x]))
+  res <- lapply(1:longest, function(x) sapply(vectors, function(y) y[x]))
   ans <- do.call(c, res)
-
-  # to preserve original NAs
-  if (useNAs && anyNA(unlist(vectors))) {
+#browser()
+  # remove newly added NAs but preserve preexisting ones
+  if (anyNA(unlist(vectors)) & useNAs) {
     NAs_vectors <- lapply(vectors, is.na)
-    NAs_interlaced <- interlace(NAs_vectors)
+    NAs_interlaced <- interlace(NAs_vectors, useNAs = FALSE)
     NAs_now <- is.na(NAs_interlaced)
     ans <- ans[!NAs_now]
+  } else {
+    ans <- ans[!is.na(ans)]
   }
 
   return(ans)
 }
-
-
-# interlace2 <- function(...) {
-#   vectors <- list(...)
-#   longest <- max(vapply(vectors, length, numeric(1)))
-#
-#   res <- lapply(1:longest, function(x) sapply(vectors, function(y) y[x]))
-#   ans <- do.call(c, res)
-#
-#   # to preserve original NAs
-#   if (useNAs && anyNA(unlist(vectors))) {
-#     NAs_vectors <- lapply(vectors, is.na)
-#     NAs_interlaced <- interlace(NA_vectors)
-#     NAs_now <- is.na(NAs_interlaced)
-#     ans <- ans[!NAs_now]
-#   }
-#
-#   return(ans)
-# }
-#
-# a <- rep(TRUE, 5)
-# b <- rep(FALSE, 5)
-# microbenchmark::microbenchmark(loop = interlace(a,b), lapply = interlace2(a,b))
