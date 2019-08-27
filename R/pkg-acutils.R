@@ -3,7 +3,7 @@
 #' Various functions I use more or less often.
 #' Some are specifically designed to deal with ScanR data.
 #'
-#' @section Foo functions:
+#' @section functions:
 #' \itemize{
 #'   \item{ScanR related:
 #'     \itemize{
