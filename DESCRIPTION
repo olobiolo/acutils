@@ -1,7 +1,7 @@
 Type: Package
 Package: acutils
 Title: Aleks Chlebowski's Utility Functions
-Version: 0.3.10
+Version: 0.3.11
 Author: person('Aleksander', 'Chlebowski', email =
     'olobiolo@gmail.com', role = c('aut', 'cre'))
 Maintainer: <olobiolo@gmail.com>
