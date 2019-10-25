@@ -50,8 +50,15 @@ rename_reference_observations <-
     }
 
     # see what values there are to replace
-    if (missing(Replacers)) Replacers <- X[[In_Variable]] %>%
-    {if(is_it_a_factor) levs else unique(.) %>% setdiff(., Replacee)}
+    if (missing(Replacers)) {
+      Replacers <- X[[In_Variable]]
+      Replacers <- if(is_it_a_factor) levs else unique(Replacers)
+      Replacers <- setdiff(Replacers, Replacee)
+
+    }
+    # previous version
+    # if (missing(Replacers)) Replacers <- X[[In_Variable]] %>%
+    # {if(is_it_a_factor) levs else unique(.) %>% setdiff(., Replacee)}
 
     # define function that replaces one value with another
     rename_reference <- function(x, in_variable, replacee, replacer) {
@@ -65,9 +72,8 @@ rename_reference_observations <-
 
     # run the above function with all elements of Replacers
     # returns set of reference observations
-    refs <-
-      lapply(Replacers, function(r) rename_reference(X, In_Variable, Replacee, r)) %>%
-      do.call(rbind, .)
+    refs <- lapply(Replacers, function(r) rename_reference(X, In_Variable, Replacee, r))
+    refs <- do.call(rbind, refs)
 
     # return requested value
     if (return.composite) {

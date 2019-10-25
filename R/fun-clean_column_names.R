@@ -27,14 +27,15 @@
 clean_column_names <- function(x, gate = 'dummy', object = 'Main') {
   if (!is.data.frame(x)) stop('"x" must be a data frame')
 
-  names(x) <-
-    names(x) %>%
-    make.names() %>%
-    gsub('....in.', '_in_', ., fixed = TRUE) %>%
-    gsub(paste0(gate, '_in_', gate), gate, ., fixed = TRUE) %>%
-    gsub(paste0(gate, '\\.'), '', .) %>%
-    gsub(paste0(object, '\\.'), '', .) %>%
-    gsub('\\.Mean', '', .) %>%
-    gsub('\\.\\.Counts', '_count', .)
+  nms <- names(x)
+  nms <- make.names(nms)
+  nms <- gsub('....in.', '_in_', nms, fixed = TRUE)
+  nms <- gsub('....in.', '_in_', nms, fixed = TRUE)
+  nms <- gsub(paste0(gate, '_in_', gate), gate, nms, fixed = TRUE)
+  nms <- gsub(paste0(gate, '\\.'), '', nms)
+  nms <- gsub(paste0(object, '\\.'), '', nms)
+  nms <- gsub('\\.Mean', '', nms)
+  nms <- gsub('\\.\\.Counts', '_count', nms)
+  names(x) <- nms
   return(x)
 }
