@@ -62,6 +62,9 @@
 #'       \item{\code{rescale}
 #'       scales a numeric vector
 #'       }
+#'       \item{\code{retry}
+#'       rerun a function in case of error
+#'       }
 #'       \item{\code{rotate_labels}
 #'       rotates axis text in a ggplot by 90 degrees
 #'       }
