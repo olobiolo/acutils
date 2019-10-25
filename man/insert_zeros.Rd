@@ -16,7 +16,7 @@ insert_zeros(x, zeros = "auto", after = 1)
 
 \method{insert_zeros}{numeric}(x, zeros = "auto", after = 1)
 
-\method{insert_zeros}{default}(x)
+\method{insert_zeros}{default}(x, zeros = "auto", after = 1)
 }
 \arguments{
 \item{x}{character vector}

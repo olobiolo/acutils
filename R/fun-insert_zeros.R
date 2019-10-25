@@ -84,7 +84,7 @@ insert_zeros.numeric <- function(x, zeros = 'auto', after = 1) {
 
 #' @export
 #' @describeIn insert_zeros throws error for non-supperted classes
-insert_zeros.default <- function(x) {
+insert_zeros.default <- function(x, zeros = 'auto', after = 1) {
 
   stop('insert_zeros doesn\'t know how to handle class ', class(x), call. = FALSE)
 }
