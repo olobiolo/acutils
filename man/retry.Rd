@@ -2,15 +2,12 @@
 % Please edit documentation in R/fun-retry.R
 \name{retry}
 \alias{retry}
-\alias{retryFO}
-\title{rerun a function in case of error}
+\title{rerun a function call in case of error}
 \usage{
-retry(foo, max.iter, fail = NA, verbose = FALSE)
-
-retryFO(foo, max.iter, fail = NA, verbose = FALSE)
+retry(call, max.iter, fail = NA, verbose = FALSE)
 }
 \arguments{
-\item{foo}{a function}
+\item{call}{call to retry}
 
 \item{max.iter}{maximum number of iterations after which failure is declared}
 
@@ -19,14 +16,11 @@ retryFO(foo, max.iter, fail = NA, verbose = FALSE)
 \item{verbose}{logical flag whether to print iterations as messages}
 }
 \value{
-\code{retry} runs \code{foo} and returns the same as \code{foo}
+\code{retry} returns the same as the function in \code{call}
 or as defined by \code{fail}.
-
-\code{retryFO} returns
-a modified version of \code{foo} reruns itself.
 }
 \description{
-If a function returns an error, run it again.
+If a call returns an error, run it again.
 }
 \details{
 Iterative calling of a function that can return a random error
@@ -34,14 +28,20 @@ can crash a process or at the very least result in incomplete data.
 To alleviate the impact of random errors the failed call will be rerun
 until it succeeds or until a limit of attempts is reached.
 If all attempts fail, a backup value will be returned.
-Note that the iteration counter is reset only when \code{retryFO} is called
-and the iteration count will stack across multiple calls of modified \code{foo}.
-Conversely, \code{retry} runs resets the counter before it runs \code{foo}.
 }
-\section{Functions}{
-\itemize{
-\item \code{retry}: runs \code{foo} untill succeeds or limit reached
+\examples{
+f <- function() {
+  x <- sample(1:2, size = 1)
+  if (x == 1) stop("it's a 1", call. = TRUE)
+  return(x)
+}
+\dontrun{
+f()
+replicate(10, f())
+}
 
-\item \code{retryFO}: returns modified \code{foo} that retries itself untill succeeds ro limit reached
-}}
+retry(f(), 2, "failed", TRUE)
+table(replicate(100, retry(f(), 2, "failed", FALSE)))
 
+
+}
