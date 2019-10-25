@@ -53,7 +53,8 @@ retry <- function(call, max.iter, fail = NA, verbose = FALSE) {
     g <- function() {
       iter <<- iter +1
       if (verbose) message('iteration ', iter)
-      tryCatch(eval(C), error = function(e) {if (iter < max.iter) g() else (return(fail))})
+      tryCatch(eval(C, parent.frame(n = 2)),
+               error = function(e) {if (iter < max.iter) g() else (return(fail))})
     }
     return(g)
   }
