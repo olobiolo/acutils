@@ -19,9 +19,9 @@ get.stack <- function(x) {
 
   # prepare statistically unprobable default object to return by get0
   notfound <- vector('list', 3)
-  notfound[[1]] <- factor(sample(letters[1:10]), collapse = '')
-  notfound[[2]] <- factor(sample(letters[1:10]), collapse = '')
-  notfound[[3]] <- factor(sample(letters[1:10]), collapse = '')
+  notfound[[1]] <- factor(paste(sample(letters[1:10]), collapse = ''))
+  notfound[[2]] <- factor(paste(sample(letters[1:10]), collapse = ''))
+  notfound[[3]] <- factor(paste(sample(letters[1:10]), collapse = ''))
 
   # identify depth of call stack
   n <- sys.nframe()

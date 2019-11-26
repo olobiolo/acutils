@@ -11,7 +11,7 @@ get.stack(x)
 }
 \value{
 Returns the value of a variable named \code{x} if one exists
-anywhere in the current call stack. Otherwise throws an error.
+       anywhere in the current call stack. Otherwise throws an error.
 }
 \description{
 Get object from the call stack rather than the search path.
