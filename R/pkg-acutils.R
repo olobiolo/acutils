@@ -46,6 +46,9 @@
 #'       \item{\code{interlace}
 #'       "mixes" several vectors into one
 #'       }
+#'       \item{\code{get.stack}
+#'       version of \code{get} to be used within functions
+#'       }
 #'       \item{\code{multiplot}
 #'       prints multiple ggplot plots on a single page
 #'       }
