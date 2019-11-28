@@ -10,6 +10,8 @@
 #' @return Returns the value of a variable named \code{x} if one exists
 #'        anywhere in the current call stack. Otherwise throws an error.
 #'
+#' @export
+#'
 get.stack <- function(x) {
   # check arguments
   stopifnot(exprs = {
