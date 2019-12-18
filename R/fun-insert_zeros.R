@@ -66,21 +66,23 @@ insert_zeros.character <- function(x, zeros = 'auto', after = 1, ...) {
   vapply(x, paster, USE.NAMES = FALSE, FUN.VALUE = character(1))
 }
 
-# #' @export
-# #' @describeIn insert_zeros runs on levels of x rather than its body
-# insert_zeros.factor <- function(x, zeros = 'auto', after = 1, ...) {
-#  warning('"x" is a factor, coercing to character')
-#  x <- as.character(x)
-#  args <- as.list(match.call())[-c(1)]
-#  do.call(insert_zeros.character, args)
-# }
+#' @export
+#' @describeIn insert_zeros runs on levels of x rather than its body
+insert_zeros.factor <- function(x, zeros = 'auto', after = 1, ...) {
+  warning('"x" is a factor, coercing to character')
+  x <- as.character(x)
+  args <- as.list(match.call())[-1]
+  args[[1]] <- x
+  do.call(insert_zeros.character, args)
+}
 
 #' @export
 #' @describeIn insert_zeros coerces to character and calls character method
 insert_zeros.integer <- function(x, zeros = 'auto', after = 1, ...) {
   message('"x" is numeric, coercing to character')
   x <- as.character(x)
-  args <- as.list(match.call())[-c(1)]
+  args <- as.list(match.call())[-1]
+  args[[1]] <- x
   do.call(insert_zeros.character, args)
 }
 
@@ -89,8 +91,9 @@ insert_zeros.integer <- function(x, zeros = 'auto', after = 1, ...) {
 insert_zeros.double <- function(x, zeros = 'auto', after = 1, ...) {
   X <- x
   x <- as.integer(x)
-  if (all.equal(X, x)) {
-    args <- as.list(match.call())[-c(1)]
+  if (isTRUE(all.equal(X, x))) {
+    args <- as.list(match.call())[-1]
+    args[[1]] <- x
     do.call(insert_zeros.integer, args)
     } else stop('doubles are valid arguments only if they are equal to integers')
 

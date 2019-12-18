@@ -3,6 +3,7 @@
 \name{insert_zeros}
 \alias{insert_zeros}
 \alias{insert_zeros.character}
+\alias{insert_zeros.factor}
 \alias{insert_zeros.integer}
 \alias{insert_zeros.double}
 \alias{insert_zeros.default}
@@ -11,6 +12,8 @@
 insert_zeros(x, ...)
 
 \method{insert_zeros}{character}(x, zeros = "auto", after = 1, ...)
+
+\method{insert_zeros}{factor}(x, zeros = "auto", after = 1, ...)
 
 \method{insert_zeros}{integer}(x, zeros = "auto", after = 1, ...)
 
@@ -46,6 +49,8 @@ so that all elements of \code{X} have an equal number of characters.
 \section{Methods (by class)}{
 \itemize{
 \item \code{character}: the basic method
+
+\item \code{factor}: runs on levels of x rather than its body
 
 \item \code{integer}: coerces to character and calls character method
 
