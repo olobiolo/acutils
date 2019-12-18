@@ -26,7 +26,7 @@ into a single location.
 \details{
 Given the location of a master directory, i.e. one where multiple scans are stored,
 this function goes into all scan directories and locates all files in the
-"PopulationData" subdirectory, as well as any "ParameterData" files that
+"PopulationData" subdirectory (including hidden ones), as well as any "ParameterData" files that
 contain an object name specified by a regular expression (\code{object}).
 All files are copied to a specified directory.
 

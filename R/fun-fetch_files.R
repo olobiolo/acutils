@@ -5,7 +5,7 @@
 #'
 #' Given the location of a master directory, i.e. one where multiple scans are stored,
 #' this function goes into all scan directories and locates all files in the
-#' "PopulationData" subdirectory, as well as any "ParameterData" files that
+#' "PopulationData" subdirectory (including hidden ones), as well as any "ParameterData" files that
 #' contain an object name specified by a regular expression (\code{object}).
 #' All files are copied to a specified directory.
 #'
@@ -55,7 +55,7 @@ fetch_files <- function(where.from, where.to, object = 'Main') {
     file.copy(from = paste0('ParameterData_', object,'.txt'), to = newpath)
     if (dir.exists('Population Results')) {
       setwd('Population Results')
-      files <- list.files()
+      files <- list.files(all.files = TRUE)
       newpath <- paste0(where.to, d,'_', files)
       file.copy(from = files, to = newpath)
       setwd(master)
