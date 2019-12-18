@@ -1,7 +1,5 @@
 context('Inserting zeros into elements of vector')
 
-library(acutils)
-
 intg <- c(1L, 2L, 10L, 20L)
 doub <- intg / 1.0
 doub2 <- intg + 0.1
