@@ -7,7 +7,7 @@
 #' this function goes into all scan directories and locates all files in the
 #' "PopulationData" subdirectory (including hidden ones), as well as any "ParameterData" files that
 #' contain an object name specified by a regular expression (\code{object}).
-#' All files are copied to a specified directory.
+#' All files are copied to a specified directory. Previously present files will be overrwritten.
 #'
 #' Names of scan directories, which are usually plate numebrs,
 #' are added to all respective file names.
@@ -44,7 +44,7 @@ fetch_files <- function(where.from, where.to, object = 'Main') {
   # check for and copy log file
   logfile <- list.files(pattern = 'screenlog')
   newpath <- paste0(where.to, logfile)
-  file.copy(from = logfile, to = newpath)
+  file.copy(from = logfile, to = newpath, overwrite = TRUE)
   # get all scan directories
   dirs <- list.dirs(full.names = FALSE, recursive = FALSE)
   # do the deed
@@ -52,12 +52,12 @@ fetch_files <- function(where.from, where.to, object = 'Main') {
     setwd(d);
     # prepare names for parameter data files
     newpath <- paste0(where.to, 'ParameterData_', object, '_', d,'.txt')
-    file.copy(from = paste0('ParameterData_', object,'.txt'), to = newpath)
+    file.copy(from = paste0('ParameterData_', object,'.txt'), to = newpath, overwrite = TRUE)
     if (dir.exists('Population Results')) {
       setwd('Population Results')
       files <- list.files(all.files = TRUE)
       newpath <- paste0(where.to, d,'_', files)
-      file.copy(from = files, to = newpath)
+      file.copy(from = files, to = newpath, overwrite = TRUE)
       setwd(master)
     } else {
       setwd(master)
