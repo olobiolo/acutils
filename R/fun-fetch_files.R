@@ -5,7 +5,7 @@
 #'
 #' Given the location of a master directory, i.e. one where multiple scans are stored,
 #' this function goes into all scan directories and locates all files in the
-#' "PopulationData" subdirectory (including hidden ones), as well as any "ParameterData" files that
+#' "Population Data" subdirectory (including hidden ones), as well as any "ParameterData" files that
 #' contain an object name specified by a regular expression (\code{object}).
 #' All files are copied to a specified directory. Previously present files will be overrwritten.
 #'
@@ -35,29 +35,35 @@ fetch_files <- function(where.from, where.to, object = 'Main') {
   on.exit(setwd(.home))
   # check if directories exist
   if (missing(where.from)) where.from <- getwd()
-  if (missing(where.to)) where.to <- getwd()
-  if (!dir.exists(where.to)) dir.create(where.to)
-  if (!endsWith(where.to, '/')) where.to <- paste0(where.to, '/')
+  if (missing(where.to)) {
+    where.to <- getwd()
+  } else {
+    if (!dir.exists(where.to)) dir.create(where.to)
+  }
+  where.to <- normalizePath(paste0(where.to, '/'), winslash = '/')
   # go to master directory
   master <- where.from
   setwd(master)
   # check for and copy log file
   logfile <- list.files(pattern = 'screenlog')
-  newpath <- paste0(where.to, logfile)
-  file.copy(from = logfile, to = newpath, overwrite = TRUE)
+  if (length(logfile) > 0) {
+    newpath <- paste0(where.to, logfile)
+    file.copy(from = logfile, to = newpath, overwrite = TRUE)
+  }
   # get all scan directories
   dirs <- list.dirs(full.names = FALSE, recursive = FALSE)
   # do the deed
   for (d in dirs) {
     setwd(d);
     # prepare names for parameter data files
+    oldpath <- paste0('ParameterData_', object,'.txt')
     newpath <- paste0(where.to, 'ParameterData_', object, '_', d,'.txt')
-    file.copy(from = paste0('ParameterData_', object,'.txt'), to = newpath, overwrite = TRUE)
+    file.copy(from = oldpath, to = newpath, overwrite = TRUE)
     if (dir.exists('Population Results')) {
       setwd('Population Results')
       files <- list.files()
-      newpath <- paste0(where.to, d,'_', files)
-      file.copy(from = files, to = newpath, overwrite = TRUE)
+      newpaths <- paste0(where.to, d,'_', files)
+      file.copy(from = files, to = newpaths, overwrite = TRUE)
       setwd(master)
     } else {
       setwd(master)
