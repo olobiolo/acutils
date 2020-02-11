@@ -55,7 +55,7 @@ fetch_files <- function(where.from, where.to, object = 'Main') {
     file.copy(from = paste0('ParameterData_', object,'.txt'), to = newpath, overwrite = TRUE)
     if (dir.exists('Population Results')) {
       setwd('Population Results')
-      files <- list.files(all.files = TRUE)
+      files <- list.files()
       newpath <- paste0(where.to, d,'_', files)
       file.copy(from = files, to = newpath, overwrite = TRUE)
       setwd(master)
