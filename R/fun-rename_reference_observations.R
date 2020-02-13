@@ -33,9 +33,9 @@ rename_reference_observations <-
     if (!is.data.frame(X)) stop('X must be a data frame')
     if (!is.character(In_Variable) || length(In_Variable) != 1)
       stop('In_Variable must ba a character vector of length 1')
-    if (!In_Variale %in% names(X)) stop('column ', In_Variable, ' not present in X')
+    if (!In_Variable %in% names(X)) stop('column ', In_Variable, ' not present in X')
     if (!is.character(Replacee)) stop('Replacee must ba a character vector of length 1')
-    if (!Replacee %in% X[[In_Variable]]) stop('Replacee not present in column ', In_Variable)
+    if (!Replacee %in% X[[In_Variable]]) stop(Replacee, ' not found in column ', In_Variable)
     if (!missing(Replacers) && !is.character(Replacers)) stop('"Replacers" must be a character vector')
 
     # if X is grouped, the grouping must be stripped and grouping variables saved to be reapplied later
