@@ -3,7 +3,6 @@
 \docType{package}
 \name{acutils}
 \alias{acutils}
-\alias{acutils-package}
 \title{acutils: some utilities}
 \description{
 Various functions I use more or less often.

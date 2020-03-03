@@ -29,7 +29,7 @@
 freader <- function(path, pattern = '_') {
   x <- data.table::fread(path, check.names = TRUE)
   x <- x[x$nuclei == 1, ]
-  names(x)[which(names(x)) == 'Parent.Object.ID..Well.'] <- 'well'
+  names(x)[which(names(x) == 'Parent.Object.ID..Well.')] <- 'well'
   x$well <- x$well + 1
   x <- dplyr::select(x, 'well', dplyr::matches(pattern))
   x <- data.frame(x, stringsAsFactors = FALSE)

@@ -4,8 +4,13 @@
 \alias{rename_reference_observations}
 \title{rename reference observations}
 \usage{
-rename_reference_observations(X, In_Variable = "treatment",
-  Replacee = "nt", Replacers, return.composite = TRUE)
+rename_reference_observations(
+  X,
+  In_Variable = "treatment",
+  Replacee = "nt",
+  Replacers,
+  return.composite = TRUE
+)
 }
 \arguments{
 \item{X}{data frame}
