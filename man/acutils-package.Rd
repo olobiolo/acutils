@@ -3,7 +3,6 @@
 \docType{package}
 \name{acutils-package}
 \alias{acutils}
-\alias{acutils-package}
 \title{acutils: some utilities}
 \description{
 Various functions I use more or less often.
@@ -53,6 +52,9 @@ Some are specifically designed to deal with ScanR data.
       \item{\code{interlace}
       "mixes" several vectors into one
       }
+      \item{\code{get.stack}
+      version of \code{get} to be used within functions
+      }
       \item{\code{multiplot}
       prints multiple ggplot plots on a single page
       }
@@ -68,6 +70,9 @@ Some are specifically designed to deal with ScanR data.
       }
       \item{\code{rescale}
       scales a numeric vector
+      }
+      \item{\code{retry}
+      rerun a function in case of error
       }
       \item{\code{rotate_labels}
       rotates axis text in a ggplot by 90 degrees

@@ -11,26 +11,28 @@
 #' so that all elements of \code{X} have an equal number of characters.
 
 #'
-#' @param x character vector
+#' @param x character or integer vector;
+#'          double vectors are handled only if they can be converted to integer and pass as \code{all.equal}
 #' @param zeros number of \code{0} characters to insert; see \code{Details}
 #' @param after position of the character after which the zeros will be inserted
+#' @param ... arguments passed to methods
 #'
 #' @return Modified character vector, where strings of zeros have been inserted at the specified position.
 #'
 #' @export
 #'
 
-insert_zeros <- function(x, zeros = 'auto', after = 1) {
+insert_zeros <- function(x, ...) {
   UseMethod('insert_zeros')
 }
 
 #' @export
 #' @describeIn insert_zeros the basic method
-insert_zeros.character <- function(x, zeros = 'auto', after = 1) {
+insert_zeros.character <- function(x, zeros = 'auto', after = 1, ...) {
   force(zeros)
   force(after)
   if (zeros < 1) {
-    print('waste of time...')
+    message('waste of time...')
     return(x)
   }
   if (after < 0) stop('"after" must not be lower than 0')
@@ -66,26 +68,40 @@ insert_zeros.character <- function(x, zeros = 'auto', after = 1) {
 
 #' @export
 #' @describeIn insert_zeros runs on levels of x rather than its body
-insert_zeros.factor <- function(x, zeros = 'auto', after = 1) {
-  message('"x" is a factor, the operation will be run on levels')
-  old.levels <- levels(x)
-  new.levels <- insert_zeros(old.levels)
-  levels(x) <- new.levels
-  return(x)
+insert_zeros.factor <- function(x, zeros = 'auto', after = 1, ...) {
+  warning('"x" is a factor, coercing to character')
+  x <- as.character(x)
+  args <- as.list(match.call())[-1]
+  args[[1]] <- x
+  do.call(insert_zeros.character, args)
 }
 
 #' @export
-#' @describeIn insert_zeros coerces to character and passes to character method
-insert_zeros.numeric <- function(x, zeros = 'auto', after = 1) {
+#' @describeIn insert_zeros coerces to character and calls character method
+insert_zeros.integer <- function(x, zeros = 'auto', after = 1, ...) {
   message('"x" is numeric, coercing to character')
   x <- as.character(x)
-  insert_zeros.character(x)
+  args <- as.list(match.call())[-1]
+  args[[1]] <- x
+  do.call(insert_zeros.character, args)
+}
+
+#' @export
+#' @describeIn insert_zeros attempts to convert to integer and calls integer method
+insert_zeros.double <- function(x, zeros = 'auto', after = 1, ...) {
+  X <- x
+  x <- as.integer(x)
+  if (isTRUE(all.equal(X, x))) {
+    args <- as.list(match.call())[-1]
+    args[[1]] <- x
+    do.call(insert_zeros.integer, args)
+    } else stop('doubles are valid arguments only if they are equal to integers')
+
 }
 
 #' @export
 #' @describeIn insert_zeros throws error for non-supperted classes
-insert_zeros.default <- function(x) {
-
+insert_zeros.default <- function(x, zeros = 'auto', after = 1, ...) {
   stop('insert_zeros doesn\'t know how to handle class ', class(x), call. = FALSE)
 }
 

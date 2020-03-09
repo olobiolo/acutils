@@ -46,6 +46,9 @@
 #'       \item{\code{interlace}
 #'       "mixes" several vectors into one
 #'       }
+#'       \item{\code{get.stack}
+#'       version of \code{get} to be used within functions
+#'       }
 #'       \item{\code{multiplot}
 #'       prints multiple ggplot plots on a single page
 #'       }
@@ -61,6 +64,9 @@
 #'       }
 #'       \item{\code{rescale}
 #'       scales a numeric vector
+#'       }
+#'       \item{\code{retry}
+#'       rerun a function in case of error
 #'       }
 #'       \item{\code{rotate_labels}
 #'       rotates axis text in a ggplot by 90 degrees

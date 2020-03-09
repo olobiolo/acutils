@@ -9,14 +9,11 @@
 \usage{
 zscore(x, ...)
 
-\method{zscore}{default}(x, robust = TRUE, deviations = FALSE,
-  reference, ...)
+\method{zscore}{default}(x, robust = TRUE, deviations = FALSE, reference, ...)
 
-\method{zscore}{data.frame}(x, robust = TRUE, deviations = FALSE,
-  reference, variables, ...)
+\method{zscore}{data.frame}(x, robust = TRUE, deviations = FALSE, reference, variables, ...)
 
-\method{zscore}{grouped_df}(x, robust = TRUE, deviations = FALSE,
-  reference, variables, ...)
+\method{zscore}{grouped_df}(x, robust = TRUE, deviations = FALSE, reference, variables, ...)
 }
 \arguments{
 \item{x}{a numeric vector}

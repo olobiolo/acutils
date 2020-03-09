@@ -4,22 +4,28 @@
 \alias{insert_zeros}
 \alias{insert_zeros.character}
 \alias{insert_zeros.factor}
-\alias{insert_zeros.numeric}
+\alias{insert_zeros.integer}
+\alias{insert_zeros.double}
 \alias{insert_zeros.default}
 \title{insert zeros into a character vector}
 \usage{
-insert_zeros(x, zeros = "auto", after = 1)
+insert_zeros(x, ...)
 
-\method{insert_zeros}{character}(x, zeros = "auto", after = 1)
+\method{insert_zeros}{character}(x, zeros = "auto", after = 1, ...)
 
-\method{insert_zeros}{factor}(x, zeros = "auto", after = 1)
+\method{insert_zeros}{factor}(x, zeros = "auto", after = 1, ...)
 
-\method{insert_zeros}{numeric}(x, zeros = "auto", after = 1)
+\method{insert_zeros}{integer}(x, zeros = "auto", after = 1, ...)
 
-\method{insert_zeros}{default}(x)
+\method{insert_zeros}{double}(x, zeros = "auto", after = 1, ...)
+
+\method{insert_zeros}{default}(x, zeros = "auto", after = 1, ...)
 }
 \arguments{
-\item{x}{character vector}
+\item{x}{character or integer vector;
+double vectors are handled only if they can be converted to integer and pass as \code{all.equal}}
+
+\item{...}{arguments passed to methods}
 
 \item{zeros}{number of \code{0} characters to insert; see \code{Details}}
 
@@ -46,7 +52,9 @@ so that all elements of \code{X} have an equal number of characters.
 
 \item \code{factor}: runs on levels of x rather than its body
 
-\item \code{numeric}: coerces to character and passes to character method
+\item \code{integer}: coerces to character and calls character method
+
+\item \code{double}: attempts to convert to integer and calls integer method
 
 \item \code{default}: throws error for non-supperted classes
 }}

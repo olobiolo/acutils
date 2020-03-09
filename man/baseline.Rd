@@ -8,11 +8,9 @@
 \usage{
 baseline(x, variables, reference, method = mean, by_group)
 
-\method{baseline}{data.frame}(x, variables, reference, method = mean,
-  by_group)
+\method{baseline}{data.frame}(x, variables, reference, method = mean, by_group)
 
-\method{baseline}{grouped_df}(x, variables, reference, method = mean,
-  by_group)
+\method{baseline}{grouped_df}(x, variables, reference, method = mean, by_group)
 }
 \arguments{
 \item{x}{a \code{data.frame} or \code{grouped data frame}}

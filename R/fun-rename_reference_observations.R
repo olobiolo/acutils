@@ -30,11 +30,12 @@
 rename_reference_observations <-
   function(X, In_Variable = 'treatment', Replacee = 'nt', Replacers, return.composite = TRUE) {
     # check arguments
-    if (!is.data.frame(X)) stop('"X" must be a data frame')
-    if (!is.character(In_Variable) ||
-        length(In_Variable != 1)) stop('"In_Variable" must ba a character vector of length 1')
-    if (!is.character(Replacee)) stop('"Replacee" must ba a character vector of length 1')
-    if (!Replacee %in% names(X)) stop('"Replacee" not present in column ', In_Variable)
+    if (!is.data.frame(X)) stop('X must be a data frame')
+    if (!is.character(In_Variable) || length(In_Variable) != 1)
+      stop('In_Variable must ba a character vector of length 1')
+    if (!In_Variable %in% names(X)) stop('column ', In_Variable, ' not present in X')
+    if (!is.character(Replacee)) stop('Replacee must ba a character vector of length 1')
+    if (!Replacee %in% X[[In_Variable]]) stop(Replacee, ' not found in column ', In_Variable)
     if (!missing(Replacers) && !is.character(Replacers)) stop('"Replacers" must be a character vector')
 
     # if X is grouped, the grouping must be stripped and grouping variables saved to be reapplied later
@@ -50,8 +51,15 @@ rename_reference_observations <-
     }
 
     # see what values there are to replace
-    if (missing(Replacers)) Replacers <- X[[In_Variable]] %>%
-    {if(is_it_a_factor) levs else unique(.) %>% setdiff(., Replacee)}
+    if (missing(Replacers)) {
+      Replacers <- X[[In_Variable]]
+      Replacers <- if(is_it_a_factor) levs else unique(Replacers)
+      Replacers <- setdiff(Replacers, Replacee)
+
+    }
+    # previous version
+    # if (missing(Replacers)) Replacers <- X[[In_Variable]] %>%
+    # {if(is_it_a_factor) levs else unique(.) %>% setdiff(., Replacee)}
 
     # define function that replaces one value with another
     rename_reference <- function(x, in_variable, replacee, replacer) {
@@ -65,9 +73,8 @@ rename_reference_observations <-
 
     # run the above function with all elements of Replacers
     # returns set of reference observations
-    refs <-
-      lapply(Replacers, function(r) rename_reference(X, In_Variable, Replacee, r)) %>%
-      do.call(rbind, .)
+    refs <- lapply(Replacers, function(r) rename_reference(X, In_Variable, Replacee, r))
+    refs <- do.call(rbind, refs)
 
     # return requested value
     if (return.composite) {

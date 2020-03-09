@@ -26,7 +26,7 @@ interlace <- function(..., useNAs = TRUE) {
 
   res <- lapply(1:longest, function(x) sapply(vectors, function(y) y[x]))
   ans <- do.call(c, res)
-#browser()
+
   # remove newly added NAs but preserve preexisting ones
   if (anyNA(unlist(vectors)) & useNAs) {
     NAs_vectors <- lapply(vectors, is.na)

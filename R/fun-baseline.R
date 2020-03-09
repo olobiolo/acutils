@@ -61,10 +61,7 @@ baseline.data.frame <- function(x, variables, reference, method = mean, by_group
     if (missing(reference)) x else
       subset(x, subset = eval(r))
   if (nrow(x_ref) == 0) stop('reference set is empty; reconsider grouping and reference specification')
-  # if (nrow(x_ref) == 0) {
-  #   warning('reference set is empty; using all observations for baseline calculation')
-  #   x_ref <- x
-  # }
+
   # separate variables to be normalized from remaining ones
   x_vars <- x[variables]
   x_rems <- x[setdiff(names(x), variables)]
