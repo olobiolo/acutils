@@ -82,8 +82,7 @@
 #'   }
 #' }
 
-#' @docType package
-#' @name acutils
 #' @author Aleksander Chlebowski
-#'
-NULL
+
+#' @keywords internal
+"_PACKAGE"
