@@ -2,12 +2,12 @@
 % Please edit documentation in R/fun-show_colors.R
 \name{show_colors}
 \alias{show_colors}
-\title{Display Shades of a Color}
+\title{display shades of a color}
 \usage{
 show_colors(color)
 }
 \arguments{
-\item{color}{a string}
+\item{color}{a regular expression for color determination}
 }
 \description{
 Quick peek at available variations of a color in R.

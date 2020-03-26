@@ -80,6 +80,9 @@
 #'       \item{\code{sphere}
 #'       calculates volume of a hyperspphere
 #'       }
+#'       \item{\code{split_input_string}
+#'       utility for shiny apps; splits an input string into substrings
+#'       }
 #'       \item{\code{zscore}
 #'       calculates z scores
 #'       }

@@ -1,4 +1,4 @@
-#' Display Shades of a Color
+#' display shades of a color
 #'
 #' Quick peek at available variations of a color in R.
 #'
@@ -6,9 +6,10 @@
 #' with which to search \code{colors()} and displays all matching colors
 #' on a rudimentary barplot.
 #'
-#' @param color a string
+#' @param color a regular expression for color determination
 #'
 #' @export
+#'
 
 show_colors <- function(color) {
   graphics::par(mar = c(5,11,4,2) + 0.1)

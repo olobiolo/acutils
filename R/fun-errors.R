@@ -36,7 +36,8 @@ sem <- function(x, na.rm = TRUE) {
   stats::sd(x) / sqrt(length(x))
 }
 
-#' @inheritParams sem
+#' @param x a numeric vector
+#' @param na.rm logical flag whether to remove NA values
 #' @param confidence the desired confidence
 #'
 #' @export

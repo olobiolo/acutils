@@ -3,6 +3,7 @@
 \docType{package}
 \name{acutils-package}
 \alias{acutils}
+\alias{acutils-package}
 \title{acutils: some utilities}
 \description{
 Various functions I use more or less often.
@@ -85,6 +86,9 @@ Some are specifically designed to deal with ScanR data.
       }
       \item{\code{sphere}
       calculates volume of a hyperspphere
+      }
+      \item{\code{split_input_string}
+      utility for shiny apps; splits an input string into substrings
       }
       \item{\code{zscore}
       calculates z scores

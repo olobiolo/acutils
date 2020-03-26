@@ -8,6 +8,7 @@
 #' @return volume of a supersphere
 #'
 #' @export
+#'
 
 sphere <- function(r, n = 7L) {
   if (n %% 1 != 0 ) stop("no fractions allowed in \"n\"")
