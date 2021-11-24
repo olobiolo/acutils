@@ -37,6 +37,7 @@ baseline.data.frame <- function(x, variables, reference, method = mean, by_group
 
   # check arguments
   if (!is.data.frame(x)) stop('x must be a data frame')
+  if (nrow(x) == 0) stop('x is an empty data frame')
   if (missing(variables)) {
     message('no variables selected; taking all numeric variables except "well" and "column"')
     variables <- setdiff(names(Filter(is.numeric, x)), c('well', 'column'))
@@ -60,7 +61,9 @@ baseline.data.frame <- function(x, variables, reference, method = mean, by_group
   x_ref <-
     if (missing(reference)) x else
       subset(x, subset = eval(r))
-  if (nrow(x_ref) == 0) stop('reference set is empty; reconsider grouping and reference specification')
+  if (nrow(x_ref) == 0) {
+    stop('reference set is empty; reconsider grouping and reference specification')
+  }
 
   # separate variables to be normalized from remaining ones
   x_vars <- x[variables]

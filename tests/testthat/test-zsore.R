@@ -87,7 +87,9 @@ df3 <- rbind(df1, df3)
 df3 <- dplyr::group_by(df3, row)
 
 df3zFF <- rbind(df1, within(df1, row <- 'B'))
-df3zFF$var1_zscore <- df3zFF$var2_zscore <- vzFF
+df3zFF$var1_zscore <- vzFF
+df3zFF$var2_zscore <- vzFF
+df3zFF <- dplyr::group_by(df3zFF, row)
 
 test_that("grouped_df method works", {
   expect_equal(zscore(df3, F, F), df3zFF)

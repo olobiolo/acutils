@@ -16,7 +16,7 @@
 #' @param robust logical flag whether to calculate normal or robust z scores
 #' @param deviations logical flag whether the supplied data is raw or normalized
 #' @param reference optional determination of reference observations;
-#'                  for the dafault method, a logical vector;
+#'                  for the default method, a logical vector;
 #'                  for the data frame method, a logical vector
 #'                  or any predicate (bare or as string) that refers to \code{x}'s variables
 #' @param variables for data frame method, character vector of variables to standardize
@@ -89,9 +89,17 @@ zscore.data.frame <- function(x, robust = TRUE, deviations = FALSE, reference, v
   }
   # get reference as logical vector
   if (!missing(reference)) {
-    r <- substitute(reference)
-    r <- if (is.call(r) | is.name(r)) r else if (is.character(r)) substitute(eval(parse(text = r)))
-    Reference <- eval(r, x)
+    reference <- substitute(reference)
+    if (is.character(reference)) {
+      # character string is parsed and evaluated within x
+      Reference <- eval(parse(text = reference), x)
+    } else if (is.call(reference)) {
+      # call is evaluated within x
+      Reference <- eval(reference, x)
+    } else if (is.logical(reference)) {
+      # logical vector is taken as is
+      Reference <- reference
+    }
   } else Reference <- logical(nrow(x))
   # get arguments from original call
   arguments <- list(robust = robust, deviations = deviations)

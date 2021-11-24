@@ -25,7 +25,7 @@ zscore(x, ...)
 \item{deviations}{logical flag whether the supplied data is raw or normalized}
 
 \item{reference}{optional determination of reference observations;
-for the dafault method, a logical vector;
+for the default method, a logical vector;
 for the data frame method, a logical vector
 or any predicate (bare or as string) that refers to \code{x}'s variables}
 
